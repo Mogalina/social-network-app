@@ -1,7 +1,6 @@
 package org.example.repository.database;
 
 import org.example.models.Entity;
-import org.example.models.User;
 import org.example.models.validators.Validator;
 import org.example.repository.Repository;
 

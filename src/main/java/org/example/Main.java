@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.models.Friendship;
+import org.example.models.Tuple;
 import org.example.models.User;
 import org.example.models.validators.FriendshipValidator;
 import org.example.models.validators.UserValidator;
@@ -33,8 +34,8 @@ public class Main {
         Service<String, User> userService = new UserService(userRepository);
 
         Validator<Friendship> friendshipValidator = new FriendshipValidator(userRepository);
-        Repository<String, Friendship> friendshipRepository = new FriendshipDatabaseRepository(friendshipValidator);
-        Service<String, Friendship> friendshipService = new FriendshipService(friendshipRepository);
+        Repository<Tuple<String>, Friendship> friendshipRepository = new FriendshipDatabaseRepository(friendshipValidator);
+        Service<Tuple<String>, Friendship> friendshipService = new FriendshipService(friendshipRepository);
 
         Network network = new Network(userService, friendshipService);
         Community community = new Community(network);

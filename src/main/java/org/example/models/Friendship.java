@@ -2,19 +2,25 @@ package org.example.models;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Represents a Friendship entity in the system newtork with a unique ID, sender id, receiver id, request date and a
  * request pending state.
  * The {@code Friendship} extends the {@code Entity} base class, using {@code Long} as the type of its identifier.
  */
-public class Friendship extends Entity<String> {
+public class Friendship extends Entity<Tuple<String>> {
 
-    private final String uid1; // Sender's identifier
-    private final String uid2; // Receiver's identifier
-    private LocalDateTime date; // The request date
-    private boolean pending; // Request pending state
+    // Sender's identifier
+    private final String uid1;
+
+    // Receiver's identifier
+    private final String uid2;
+
+    // The request date
+    private LocalDateTime date;
+
+    // Request pending state
+    private boolean pending;
 
     /**
      * Constructs a new {@code Friendship} with the specified sender id, receiver id and request date.
@@ -23,7 +29,7 @@ public class Friendship extends Entity<String> {
      * @param uid2 the identifier of the receiver user
      */
     public Friendship(String uid1, String uid2) {
-        setId(UUID.randomUUID().toString());
+        setId(new Tuple<>(uid1, uid2));
         this.uid1 = uid1;
         this.uid2 = uid2;
         this.date = LocalDateTime.now(); // Automatically sets the current date and time
@@ -122,9 +128,8 @@ public class Friendship extends Entity<String> {
     @Override
     public String toString() {
         return "@FRIENDSHIP | " +
-                "ID <" + id + ">" +
-                "\n            | SENDER <" + uid1 + ">" +
-                "\n            | RECEIVER <" + uid2 + ">" +
+                "USER <" + uid1 + ">" +
+                "\n            | USER <" + uid2 + ">" +
                 "\n            | DATE <" + date + ">" +
                 "\n            | PENDING <" + pending + ">";
     }
@@ -143,7 +148,7 @@ public class Friendship extends Entity<String> {
         if (o == null || getClass() != o.getClass()) return false;
 
         Friendship friendship = (Friendship) o;
-        return Objects.equals(id, friendship.id) &&
+        return Objects.equals(getId(), friendship.getId()) &&
                 Objects.equals(uid1, friendship.uid1) &&
                 Objects.equals(uid2, friendship.uid2) &&
                 Objects.equals(date, friendship.date) &&
@@ -158,6 +163,6 @@ public class Friendship extends Entity<String> {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(id, uid1, uid2, date, pending);
+        return Objects.hash(getId(), uid1, uid2, date, pending);
     }
 }

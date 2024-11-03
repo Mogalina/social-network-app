@@ -1,6 +1,7 @@
 package org.example.service;
 
 import org.example.models.Friendship;
+import org.example.models.Tuple;
 import org.example.models.User;
 
 import java.util.*;
@@ -16,7 +17,7 @@ public class Network {
     private final Service<String, User> userService;
 
     // Service to handle and perform operations on Friendship entities
-    private final Service<String, Friendship> friendshipService;
+    private final Service<Tuple<String>, Friendship> friendshipService;
 
     /**
      * Constructs a new Network with the specified {@link UserService} and {@link FriendshipService}.
@@ -24,7 +25,7 @@ public class Network {
      * @param userService the service used to perform operations on {@link User} entities
      * @param friendshipService the service used to perform operations on {@link Friendship} entities
      */
-    public Network(Service<String, User> userService, Service<String, Friendship> friendshipService) {
+    public Network(Service<String, User> userService, Service<Tuple<String>, Friendship> friendshipService) {
         this.userService = userService;
         this.friendshipService = friendshipService;
     }

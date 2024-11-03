@@ -3,7 +3,7 @@ package org.example.models;
 import java.util.Objects;
 
 /**
- * A generic base class for entities, identified by a unique identifier of type {@code ID}.
+ * A generic base class for entities, identified by a unique identifier of type ID.
  *
  * This class provides common functionality such as equality checks, hash code generation and string representation
  * based on the {@code id} field.

@@ -1,6 +1,7 @@
 package org.example.repository.file;
 
 import org.example.models.Friendship;
+import org.example.models.Tuple;
 import org.example.models.validators.Validator;
 import org.jetbrains.annotations.NotNull;
 
@@ -12,7 +13,7 @@ import java.util.List;
 /**
  * Repository class for managing Friendship entities in a file-based/in-memory storage.
  */
-public class FriendshipFileRepository extends AbstractFileRepository<String, Friendship> {
+public class FriendshipFileRepository extends AbstractFileRepository<Tuple<String>, Friendship> {
 
     /**
      * Constructs a new FriendshipFileRepository with the specified file name and validator.
@@ -34,7 +35,6 @@ public class FriendshipFileRepository extends AbstractFileRepository<String, Fri
     @Override
     protected Friendship extractEntity(@NotNull String record) {
         List<String> fields = Arrays.asList(record.split(","));
-        String id = fields.get(0);
         String uid1 = fields.get(1);
         String uid2 = fields.get(2);
         LocalDateTime date = LocalDateTime.parse(fields.get(3));
@@ -43,7 +43,7 @@ public class FriendshipFileRepository extends AbstractFileRepository<String, Fri
         Friendship friendship = new Friendship(uid1, uid2);
         friendship.setDate(date);
         friendship.setPending(pending);
-        friendship.setId(id);
+        friendship.setId(new Tuple<>(uid1, uid2));
         return friendship;
     }
 
@@ -55,8 +55,7 @@ public class FriendshipFileRepository extends AbstractFileRepository<String, Fri
      */
     @Override
     protected String entityToString(@NotNull Friendship friendship) {
-        return friendship.getId() +
-                "," + friendship.getSenderId() +
+        return friendship.getSenderId() +
                 "," + friendship.getReceiverId() +
                 "," + friendship.getDate() +
                 "," + friendship.isPending();

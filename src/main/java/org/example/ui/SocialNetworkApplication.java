@@ -87,7 +87,7 @@ public class SocialNetworkApplication {
         System.out.printf("| %-19s | %-50s | %-52s |%n", "update_user", "<ID> <FIRST_NAME> <LAST_NAME> <EMAIL> <PASSWORD>", "Updates user from network");
         System.out.printf("| %-19s | %-50s | %-52s |%n", "del_user", "<ID>", "Delete user from network");
         System.out.printf("| %-19s | %-50s | %-52s |%n", "user", "<ID>", "Display user information from network");
-        System.out.printf("| %-19s | %-50s | %-52s |%n", "friends", "<UID>", "Display friends of specific user");
+        System.out.printf("| %-19s | %-50s | %-52s |%n", "friends", "<ID>", "Display friends of specific user");
         System.out.printf("| %-19s | %-50s | %-52s |%n", "send_req", "<SENDER_ID> <RECEIVER_ID>", "Send friend request to user");
         System.out.printf("| %-19s | %-50s | %-52s |%n", "rels", "-", "Display available friendship relations between users");
         System.out.printf("| %-19s | %-50s | %-52s |%n", "del_req", "<SENDER_ID> <RECEIVER_ID>", "Delete friendship relation or request between users");
