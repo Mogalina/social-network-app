@@ -1,0 +1,86 @@
+.display-container {
+    -fx-alignment: center;
+    -fx-padding: 10px;
+    -fx-background-color: #f0f0f0;
+}
+
+.signup-container {
+    -fx-alignment: top-center;
+    -fx-translate-y: 50%;
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 20px;
+    -fx-padding: 20px 10px 20px 10px;
+    -fx-max-width: 350px;
+    -fx-pref-width: 350px;
+    -fx-min-width: 350px;
+    -fx-min-height: 490px;
+    -fx-pref-height: 490px;
+    -fx-max-height: 490px;
+    -fx-border-radius: 20px;
+    -fx-border-color: lightgray;
+    -fx-border-width: 3px;
+    -fx-spacing: 40px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 4);
+    -fx-font-size: 15px;
+}
+
+.signup-fields {
+    -fx-alignment: top-center;
+    -fx-translate-y: 50%;
+    -fx-background-color: transparent;
+    -fx-spacing: 30px;
+}
+
+.title-field {
+    -fx-font-size: 28px;
+    -fx-fill: #403e3a;
+}
+
+.text-field {
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: lightgray;
+    -fx-border-style: solid;
+    -fx-background-color: transparent;
+    -fx-min-width: 250px;
+    -fx-pref-width: 250px;
+    -fx-max-width: 250px;
+    -fx-padding: 0px 0px 10px 0px;
+    -fx-fill: #403e3a;
+}
+
+.confirm-btn {
+    -fx-min-width: 120px;
+    -fx-pref-width: 120px;
+    -fx-max-width: 120px;
+    -fx-min-height: 40px;
+    -fx-pref-height: 40px;
+    -fx-max-height: 40px;
+    -fx-background-color: #3a66ad;
+    -fx-background-radius: 20px;
+    -fx-text-fill: #f0f0f0;
+    -fx-border-color: transparent;
+    -fx-border-radius: 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 4);
+    -fx-cursor: hand;
+}
+
+.btn-login {
+    -fx-underline: false;
+    -fx-text-fill: #3a66ad;
+}
+
+.btn-login-info {
+    -fx-fill: silver;
+}
+
+.go-to-login-container {
+    -fx-alignment: center;
+    -fx-spacing: 0px;
+    -fx-border-width: 1px 0px 0px 0px;
+    -fx-border-color: lightgray;
+    -fx-border-style: solid;
+    -fx-padding: 10px 0px 0px 0px;
+    -fx-min-width: 250px;
+    -fx-pref-width: 250px;
+    -fx-max-width: 250px;
+}

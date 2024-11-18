@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Text?>
+
+<?import java.net.URL?>
+
+<StackPane styleClass="intro-container"
+           xmlns="http://javafx.com/javafx/21.0.5"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="org.example.controllers.OpenViewController">
+   <stylesheets>
+      <URL value="@../styles/open-view.css" />
+   </stylesheets>
+
+   <VBox styleClass="intro-container">
+      <Text fx:id="titleText" styleClass="title-text" text="Social Network Application"/>
+      <Text fx:id="subtitleText" styleClass="subtitle-text" text="a place where all connections meet"/>
+   </VBox>
+</StackPane>

@@ -1,0 +1,20 @@
+.intro-container {
+    -fx-alignment: center;
+    -fx-spacing: 10px;
+    -fx-padding: 20px;
+    -fx-background-color: #f0f0f0;
+}
+
+.title-text {
+    -fx-fill: #403e3a;
+    -fx-font-family: "System Bold";
+    -fx-font-size: 71px;
+    -fx-font-weight: bold;
+}
+
+.subtitle-text {
+    -fx-fill: gray;
+    -fx-font-family: "System Bold";
+    -fx-font-size: 22px;
+    -fx-font-weight: normal;
+}

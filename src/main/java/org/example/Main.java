@@ -11,9 +11,6 @@ import org.example.repository.database.UserDatabaseRepository;
 import org.example.repository.Repository;
 import org.example.service.*;
 import org.example.ui.SocialNetworkApplication;
-import org.example.utils.Config;
-import org.example.repository.file.UserFileRepository;
-import org.example.repository.file.FriendshipFileRepository;
 
 import java.io.IOException;
 

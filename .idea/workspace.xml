@@ -6,15 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b50978c8-a92d-4807-aaaa-526228acbbf3" name="Changes" comment="Configure project.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/models/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/Friendship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/models/Friendship.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/database/AbstractDatabaseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/database/AbstractDatabaseRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/database/FriendshipDatabaseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/database/FriendshipDatabaseRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/file/FriendshipFileRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/file/FriendshipFileRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/FriendshipService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/FriendshipService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/Network.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/Network.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/ui/SocialNetworkApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/ui/SocialNetworkApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/ui/SocialNetworkApplication.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +23,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -70,10 +65,13 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Runner.executor": "Run",
+    "Application.UI.executor": "Run",
     "Application.Unnamed.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
     "Gradle.Build social-network-app.executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
     "Gradle.social-network-app [:Main.main()].executor": "Run",
+    "Gradle.social-network-app [:StartApplication.main()].executor": "Run",
     "Kotlin script (Beta).build.gradle.kts.executor": "Run",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
@@ -87,7 +85,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true"
@@ -102,9 +100,13 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/libs" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/java" />
+    </key>
   </component>
-  <component name="RunManager">
-    <configuration name="Runner" type="Application" factoryName="Application">
+  <component name="RunManager" selected="Application.UI">
+    <configuration name="CLI" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="openjdk-21" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="org.example.Main" />
@@ -123,6 +125,30 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="UI" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="org.example.StartApplication" />
+      <module name="social-network-app.main" />
+      <option name="VM_PARAMETERS" value="--module-path libs/javafx-sdk-21.0.5/lib --add-modules javafx.controls,javafx.fxml " />
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.CLI" />
+      <item itemvalue="Application.UI" />
+    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -143,7 +169,18 @@
       <workItem from="1730559398940" duration="5681000" />
       <workItem from="1730566749738" duration="27000" />
       <workItem from="1730566782965" duration="3232000" />
-      <workItem from="1730665049215" duration="7642000" />
+      <workItem from="1730665049215" duration="7712000" />
+      <workItem from="1730980182903" duration="1752000" />
+      <workItem from="1731062348131" duration="771000" />
+      <workItem from="1731068351743" duration="5369000" />
+      <workItem from="1731510107758" duration="20000" />
+      <workItem from="1731511862150" duration="11053000" />
+      <workItem from="1731668263413" duration="2982000" />
+      <workItem from="1731681389649" duration="2462000" />
+      <workItem from="1731950744091" duration="292000" />
+      <workItem from="1731951052825" duration="2902000" />
+      <workItem from="1731957976195" duration="180000" />
+      <workItem from="1731958163216" duration="13618000" />
     </task>
     <task id="LOCAL-00001" summary="Configure project.">
       <option name="closed" value="true" />

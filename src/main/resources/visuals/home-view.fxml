@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Text?>
+
+<?import java.net.URL?>
+
+<StackPane styleClass="intro-container"
+           xmlns="http://javafx.com/javafx/21.0.5"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="org.example.controllers.HomeViewController">
+    <stylesheets>
+        <URL value="@../styles/home-view.css" />
+    </stylesheets>
+
+    <Text>OK</Text>
+</StackPane>
