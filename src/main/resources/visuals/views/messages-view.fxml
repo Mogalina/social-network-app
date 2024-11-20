@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+
+<?import javafx.scene.layout.AnchorPane?>
+
+<?import javafx.scene.control.Label?>
+
+<AnchorPane
+         styleClass="messages-container"
+         xmlns="http://javafx.com/javafx/21.0.5"
+         xmlns:fx="http://javafx.com/fxml/1"
+         fx:controller="org.example.controllers.HomeViewController">
+    <stylesheets>
+        <URL value="@../../styles/home-view.css" />
+    </stylesheets>
+
+    <fx:include source="../layouts/default-layout.fxml"
+                AnchorPane.topAnchor="0.0"
+                AnchorPane.leftAnchor="0.0"
+                AnchorPane.rightAnchor="0.0" />
+
+    <AnchorPane AnchorPane.topAnchor="50.0"
+                AnchorPane.bottomAnchor="50.0"
+                AnchorPane.leftAnchor="0.0"
+                AnchorPane.rightAnchor="0.0">
+        <Label text="HOME PAGE"/>
+    </AnchorPane>
+</AnchorPane>
