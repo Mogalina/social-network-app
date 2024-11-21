@@ -16,22 +16,25 @@ import javafx.stage.Stage;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Controller for managing user profile interactions.
+ */
 public class ProfileViewController {
 
+    // ObservableLists for managing the data displayed in the tables
     private ObservableList<User> friendsData = FXCollections.observableArrayList();
-
     private ObservableList<User> sentRequestsData = FXCollections.observableArrayList();
+    private ObservableList<User> receivedRequestsData = FXCollections.observableArrayList();
 
-    private ObservableList<User> receivedResuestsData = FXCollections.observableArrayList();
-
+    // Network service to interact with the backend for user data
     private Network network;
 
+    // The current logged-in user
     private User user;
 
+    // Strings to store the selected emails in tables
     private String selectedExistingFriendEmail = null;
-
     private String selectedExistingReceivedRequestEmail = null;
-
     private String selectedExistingSentRequestEmail = null;
 
     @FXML
@@ -76,13 +79,21 @@ public class ProfileViewController {
     @FXML
     private TableColumn<User, String> requestedEmailColumn;
 
+    /**
+     * Initializes the Profile View.
+     */
     public void initialize() {
+        // Initialize network service
         network = GlobalNetwork.getNetwork();
 
+        // Get the current logged-in user
         user = UserController.getUser();
+
+        // Set profile information
         profileName.setText(user.getFirstName() + " " + user.getLastName());
         profileEmail.setText(user.getEmail());
 
+        // Set up the friends table
         friendsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
@@ -90,12 +101,14 @@ public class ProfileViewController {
         friendsData = setFriendsData();
         friendsTable.setItems(friendsData);
 
+        // Set up listener for friend selection
         friendsTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 selectedExistingFriendEmail = newValue.getEmail();
             }
         });
 
+        // Set up the sent requests table
         sentRequestsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         requestesFirstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
         requestesLastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
@@ -103,19 +116,22 @@ public class ProfileViewController {
         sentRequestsData = setSentRequestsData();
         sentRequestsTable.setItems(sentRequestsData);
 
+        // Set up listener for sent request selection
         sentRequestsTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 selectedExistingSentRequestEmail = newValue.getEmail();
             }
         });
 
+        // Set up the received requests table
         receivedRequestsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         requestedFirstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
         requestedLastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
         requestedEmailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
-        receivedResuestsData = setReceivedRequestsData();
-        receivedRequestsTable.setItems(receivedResuestsData);
+        receivedRequestsData = setReceivedRequestsData();
+        receivedRequestsTable.setItems(receivedRequestsData);
 
+        // Set up listener for received request selection
         receivedRequestsTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 selectedExistingReceivedRequestEmail = newValue.getEmail();
@@ -123,21 +139,23 @@ public class ProfileViewController {
         });
     }
 
+    // Methods for retrieving and updating the user data displayed in the tables
     private ObservableList<User> setFriendsData() {
         List<User> friendsOfUser = (List<User>) network.getFriendsOfUser(user.getId());
         return FXCollections.observableArrayList(friendsOfUser);
     }
 
     private ObservableList<User> setSentRequestsData() {
-        List<User> sentRequestsOfUserOfUser = (List<User>) network.getSentRequestsOfUser(user.getId());
-        return FXCollections.observableArrayList(sentRequestsOfUserOfUser);
+        List<User> sentRequests = (List<User>) network.getSentRequestsOfUser(user.getId());
+        return FXCollections.observableArrayList(sentRequests);
     }
 
     private ObservableList<User> setReceivedRequestsData() {
-        List<User> receivedRequestsOfUser = (List<User>) network.getReceivedRequestsOfUser(user.getId());
-        return FXCollections.observableArrayList(receivedRequestsOfUser);
+        List<User> receivedRequests = (List<User>) network.getReceivedRequestsOfUser(user.getId());
+        return FXCollections.observableArrayList(receivedRequests);
     }
 
+    // Methods for handling friend and request actions
     public void addNewFriend() {
         Stage stage = (Stage) profileName.getScene().getWindow();
         SceneUtils.switchScene(stage, "/visuals/views/add-friend-view.fxml");
@@ -150,7 +168,6 @@ public class ProfileViewController {
 
     public void removeExistingFriend() {
         Stage stage = (Stage) profileName.getScene().getWindow();
-
         if (selectedExistingFriendEmail == null) {
             PopupNotification.showNotification(stage, "Please select a friend", 4000, "#ef5356");
         } else {
@@ -164,7 +181,6 @@ public class ProfileViewController {
 
     public void acceptFriendRequest() {
         Stage stage = (Stage) profileName.getScene().getWindow();
-
         if (selectedExistingReceivedRequestEmail == null) {
             PopupNotification.showNotification(stage, "Please select a request", 4000, "#ef5356");
         } else {
@@ -179,7 +195,6 @@ public class ProfileViewController {
 
     public void declineFriendRequest() {
         Stage stage = (Stage) profileName.getScene().getWindow();
-
         if (selectedExistingReceivedRequestEmail == null) {
             PopupNotification.showNotification(stage, "Please select a request", 4000, "#ef5356");
         } else {
@@ -193,7 +208,6 @@ public class ProfileViewController {
 
     public void unsendFriendRequest() {
         Stage stage = (Stage) profileName.getScene().getWindow();
-
         if (selectedExistingSentRequestEmail == null) {
             PopupNotification.showNotification(stage, "Please select a request", 4000, "#ef5356");
         } else {
@@ -205,6 +219,7 @@ public class ProfileViewController {
         }
     }
 
+    // Methods for refreshing data in the tables
     private void updateFriendsData() {
         friendsData.setAll(setFriendsData());
     }
@@ -214,6 +229,6 @@ public class ProfileViewController {
     }
 
     private void updateReceivedRequestsData() {
-        receivedResuestsData.setAll(setReceivedRequestsData());
+        receivedRequestsData.setAll(setReceivedRequestsData());
     }
 }
