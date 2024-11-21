@@ -16,7 +16,7 @@
            xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="org.example.controllers.SignupViewController">
     <stylesheets>
-        <URL value="@../styles/signup-view.css" />
+        <URL value="@../../styles/signup-view.css" />
     </stylesheets>
 
     <VBox styleClass="signup-container">

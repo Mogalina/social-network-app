@@ -21,7 +21,7 @@ public class StartApplication extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = getLoader("/visuals/open-view.fxml");
+        FXMLLoader fxmlLoader = getLoader("/visuals/views/open-view.fxml");
 
         Scene scene = new Scene(fxmlLoader.load(), 900, 600);
         primaryStage.setTitle("Social Network");

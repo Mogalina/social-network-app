@@ -24,7 +24,8 @@ public class SceneUtils {
             FXMLLoader loader = new FXMLLoader(SceneUtils.class.getResource(fxmlPath));
             Parent newRoot = loader.load();
 
-            stage.setScene(new Scene(newRoot));
+            Scene newScene = new Scene(newRoot);
+            stage.setScene(newScene);
             stage.setFullScreen(true);
             stage.show();
         } catch (IOException e) {

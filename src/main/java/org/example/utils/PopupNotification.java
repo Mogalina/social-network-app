@@ -40,7 +40,7 @@ public class PopupNotification {
 
         // Calculate the position of the popup at the top center of the window
         double xPosition = stage.getX() + stage.getWidth() / 2 - 100;
-        double yPosition = stage.getY() + 20;
+        double yPosition = stage.getY() + 10;
 
         // Show the Popup
         popup.show(stage, xPosition, yPosition);

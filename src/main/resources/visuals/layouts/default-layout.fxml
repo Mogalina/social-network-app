@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://java.sun.com/JSP/Page">
+    <stylesheets>
+        <URL value="@../../styles/default-layout.css" />
+    </stylesheets>
+
+    <fx:include source="../components/header.fxml"
+                AnchorPane.topAnchor="0.0"
+                AnchorPane.leftAnchor="0.0"
+                AnchorPane.rightAnchor="0.0" />
+
+    <AnchorPane styleClass="content"
+                AnchorPane.topAnchor="60.0"
+                AnchorPane.bottomAnchor="60.0"
+                AnchorPane.leftAnchor="0.0"
+                AnchorPane.rightAnchor="0.0">
+    </AnchorPane>
+</AnchorPane>

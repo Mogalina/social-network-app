@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import org.example.models.User;
 import org.example.middleware.Auth;
 import org.example.service.Network;
+import org.example.utils.PasswordUtils;
 import org.example.utils.PopupNotification;
 import org.example.utils.SceneUtils;
 
@@ -52,19 +53,21 @@ public class SignupViewController {
 
         if (searchedUser == null) {
             try {
-                User user = new User(firstName, lastName, password, email);
+                // Attempt to add new user to network
+                String hashedPassword = PasswordUtils.hashPassword(password);
+                User user = new User(firstName, lastName, hashedPassword, email);
                 network.addUser(user);
 
                 // Show a success notification and redirect to the login page
-                PopupNotification.showNotification(stage, "Account created successfully", 5000, "#68c96d");
+                PopupNotification.showNotification(stage, "Account created successfully", 4000, "#68c96d");
 
                 // Trigger the login page transition
                 handleLoginClick();
             } catch (Exception e) {
-                PopupNotification.showNotification(stage, e.getMessage(), 5000, "#ef5356");
+                PopupNotification.showNotification(stage, e.getMessage(), 4000, "#ef5356");
             }
         } else {
-            PopupNotification.showNotification(stage, "Email address already exists", 5000, "#ef5356");
+            PopupNotification.showNotification(stage, "Email address already exists", 4000, "#ef5356");
         }
     }
 
@@ -74,6 +77,6 @@ public class SignupViewController {
     @FXML
     public void handleLoginClick() {
         Stage stage = (Stage) emailField.getScene().getWindow();
-        SceneUtils.switchScene(stage, "/visuals/login-view.fxml");
+        SceneUtils.switchScene(stage, "/visuals/views/login-view.fxml");
     }
 }

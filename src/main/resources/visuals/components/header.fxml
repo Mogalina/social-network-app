@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<?import java.net.URL?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.controllers.HeaderController">
+    <stylesheets>
+        <URL value="@../../styles/header.css" />
+    </stylesheets>
+
+    <HBox styleClass="header-container"
+          AnchorPane.topAnchor="0.0"
+          AnchorPane.leftAnchor="0.0"
+          AnchorPane.rightAnchor="0.0">
+        <HBox styleClass="app-options">
+            <ImageView fitWidth="32.0" fitHeight="32.0"
+                       preserveRatio="true"
+                       fx:id="homeImage"
+                       onMouseClicked="#goToHome">
+                <Image url="@../../assets/images/pngs/home-icon.png" />
+            </ImageView>
+            <ImageView fitWidth="32.0" fitHeight="32.0"
+                       preserveRatio="true"
+                       fx:id="messagesImage"
+                       onMouseClicked="#goToMessages">
+                <Image url="@../../assets/images/pngs/messages-icon.png" />
+            </ImageView>
+            <ImageView fitWidth="32.0" fitHeight="32.0"
+                       preserveRatio="true">
+                <Image url="@../../assets/images/pngs/events-icon.png" />
+            </ImageView>
+        </HBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <HBox styleClass="profile-options">
+            <ImageView fitWidth="32.0" fitHeight="32.0"
+                       preserveRatio="true">
+                <Image url="@../../assets/images/pngs/notifications-icon.png" />
+            </ImageView>
+            <ImageView fitWidth="32.0" fitHeight="32.0"
+                       fx:id="profileImage"
+                       onMouseClicked="#goToProfile"
+                       preserveRatio="true">
+                <Image url="@../../assets/images/pngs/profile-icon.png" />
+            </ImageView>
+        </HBox>
+    </HBox>
+</AnchorPane>

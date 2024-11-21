@@ -11,7 +11,7 @@
            xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="org.example.controllers.OpenViewController">
    <stylesheets>
-      <URL value="@../styles/open-view.css" />
+      <URL value="@../../styles/open-view.css" />
    </stylesheets>
 
    <VBox styleClass="intro-container">

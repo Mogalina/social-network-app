@@ -4,6 +4,7 @@ import org.example.models.Friendship;
 import org.example.models.User;
 import org.example.service.Community;
 import org.example.service.Network;
+import org.example.utils.PasswordUtils;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -287,7 +288,8 @@ public class SocialNetworkApplication {
         String password = params.get(3);
 
         try {
-            User user = new User(firstName, lastName, password, email);
+            String hashedPassword = PasswordUtils.hashPassword(password);
+            User user = new User(firstName, lastName, hashedPassword, email);
             Optional<User> addedUser = network.addUser(user);
             if (addedUser.isPresent()) {
                 System.out.println("[INFO] User added successfully");
@@ -313,7 +315,8 @@ public class SocialNetworkApplication {
         String password = params.get(4);
 
         try {
-            User user = new User(firstName, lastName, password, email);
+            String hashedPassword = PasswordUtils.hashPassword(password);
+            User user = new User(firstName, lastName, hashedPassword, email);
             user.setId(id);
             Optional<User> updatedUser = network.updateUser(user);
             if (updatedUser.isPresent()) {

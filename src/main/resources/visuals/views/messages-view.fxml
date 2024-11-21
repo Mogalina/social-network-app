@@ -3,16 +3,21 @@
 <?import java.net.URL?>
 
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.control.Label?>
 
 <AnchorPane
          styleClass="messages-container"
          xmlns="http://javafx.com/javafx/21.0.5"
          xmlns:fx="http://javafx.com/fxml/1"
-         fx:controller="org.example.controllers.HomeViewController">
+         fx:controller="org.example.controllers.MessagesViewController">
     <stylesheets>
-        <URL value="@../../styles/home-view.css" />
+        <URL value="@../../styles/messages-view.css" />
     </stylesheets>
 
     <fx:include source="../layouts/default-layout.fxml"
@@ -20,10 +25,64 @@
                 AnchorPane.leftAnchor="0.0"
                 AnchorPane.rightAnchor="0.0" />
 
-    <AnchorPane AnchorPane.topAnchor="50.0"
-                AnchorPane.bottomAnchor="50.0"
-                AnchorPane.leftAnchor="0.0"
-                AnchorPane.rightAnchor="0.0">
-        <Label text="HOME PAGE"/>
-    </AnchorPane>
+    <HBox AnchorPane.topAnchor="59.0"
+          AnchorPane.bottomAnchor="0.0"
+          AnchorPane.leftAnchor="0.0"
+          AnchorPane.rightAnchor="0.0">
+        <VBox styleClass="conversations-container">
+            <StackPane styleClass="search-bar">
+                <TextField styleClass="search-bar-input" promptText="Search a friend" />
+                <ImageView fitWidth="25.0" fitHeight="25.0"
+                           preserveRatio="true"
+                           styleClass="search-bar-icon"
+                           StackPane.alignment="CENTER_RIGHT">
+                    <Image url="@../../assets/images/pngs/search-icon.png" />
+                </ImageView>
+            </StackPane>
+            <VBox styleClass="friends-container">
+                <HBox styleClass="friend-container">
+                    <ImageView fitWidth="13.0" fitHeight="13.0"
+                               preserveRatio="true"
+                               styleClass="friend-container-dot"
+                               StackPane.alignment="CENTER_LEFT">
+                        <Image url="@../../assets/images/pngs/dot-icon.png" />
+                    </ImageView>
+                    <Label styleClass="friend-container-email"
+                           maxWidth="270"
+                           text="eric.moghioros@gmail.com" />
+                </HBox>
+            </VBox>
+            <VBox styleClass="friends-container">
+                <HBox styleClass="friend-container">
+
+                </HBox>
+            </VBox>
+            <VBox styleClass="friends-container">
+                <HBox styleClass="friend-container">
+
+                </HBox>
+            </VBox>
+        </VBox>
+        <VBox AnchorPane.leftAnchor="0.0"
+              AnchorPane.rightAnchor="0.0"
+              AnchorPane.topAnchor="0.0"
+              AnchorPane.bottomAnchor="0.0"
+              HBox.hgrow="ALWAYS">
+            <HBox styleClass="messager"
+                  HBox.hgrow="ALWAYS"
+                  VBox.vgrow="NEVER">
+                <Label text="eric.moghioros@gmail.com" />
+            </HBox>
+            <HBox styleClass="messages"
+                  VBox.vgrow="ALWAYS"
+                  HBox.hgrow="ALWAYS">
+                <Label text="CHAT" />
+            </HBox>
+            <HBox styleClass="messages-options"
+                  VBox.vgrow="NEVER"
+                  HBox.hgrow="ALWAYS">
+                <Label text="SENDER" />
+            </HBox>
+        </VBox>
+    </HBox>
 </AnchorPane>

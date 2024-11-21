@@ -27,15 +27,15 @@ public class LoginViewController {
 
         User user = Auth.login(email, password);
         if (user != null) {
-            SceneUtils.switchScene(stage, "/visuals/home-view.fxml");
+            SceneUtils.switchScene(stage, "/visuals/views/home-view.fxml");
         } else {
-            PopupNotification.showNotification(stage, "Invalid email or password", 5000, "#ef5356");
+            PopupNotification.showNotification(stage, "Invalid email or password", 4000, "#ef5356");
         }
     }
 
     @FXML
     public void handleSignupClick() {
         Stage stage = (Stage) emailField.getScene().getWindow();
-        SceneUtils.switchScene(stage, "/visuals/signup-view.fxml");
+        SceneUtils.switchScene(stage, "/visuals/views/signup-view.fxml");
     }
 }

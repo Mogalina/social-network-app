@@ -44,7 +44,7 @@ public class OpenViewController {
             // When the subtitle animation finishes, switch to the login scene
             fadeInSubtitle.setOnFinished(subEvent -> {
                 Stage stage = (Stage) titleText.getScene().getWindow();
-                SceneUtils.switchScene(stage, "/visuals/login-view.fxml");
+                SceneUtils.switchScene(stage, "/visuals/views/login-view.fxml");
             });
 
             // Start the subtitle animation

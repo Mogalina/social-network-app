@@ -1,0 +1,132 @@
+.profile-container {
+    -fx-background-color: #f0f0f0;
+    -fx-fill: #403e3a;
+    -fx-font-size: 15px;
+    -fx-alignment: top-center;
+}
+
+.profile-info-container {
+    -fx-translate-y: 50px;
+    -fx-alignment: top-center;
+    -fx-min-height: 330px;
+    -fx-pref-height: 330px;
+    -fx-max-height: 330px;
+    -fx-min-width: 300px;
+    -fx-pref-width: 300px;
+    -fx-max-width: 300px;
+    -fx-padding: 20px 10px 20px 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 4);
+    -fx-border-color: lightgray;
+    -fx-border-width: 3px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+}
+
+.profile-avatar {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 4);
+    -fx-border-color: lightgray;
+    -fx-border-width: 3px;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+}
+
+.linethrough {
+    -fx-min-height: 2px;
+    -fx-pref-height: 2px;
+    -fx-max-height: 2px;
+    -fx-min-width: 260px;
+    -fx-pref-width: 260px;
+    -fx-max-width: 260px;
+    -fx-background-color: lightgray;
+    -fx-translate-y: 54px;
+}
+
+.profile-name {
+    -fx-translate-y: 42px;
+    -fx-alignment: center;
+}
+
+.profile-email {
+    -fx-translate-y: 52px;
+    -fx-alignment: center;
+}
+
+.edit-profile-btn {
+    -fx-min-width: 120px;
+    -fx-pref-width: 120px;
+    -fx-max-width: 120px;
+    -fx-min-height: 40px;
+    -fx-pref-height: 40px;
+    -fx-max-height: 40px;
+    -fx-background-color: #90caf9;
+    -fx-background-radius: 20px;
+    -fx-text-fill: #f0f0f0;
+    -fx-border-color: transparent;
+    -fx-border-radius: 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 4);
+    -fx-cursor: hand;
+    -fx-translate-y: 100px;
+}
+
+.friends-info-container {
+    -fx-min-height: 300px;
+    -fx-pref-height: 300px;
+    -fx-max-height: 300px;
+    -fx-min-width: 600px;
+    -fx-pref-width: 600px;
+    -fx-max-width: 600px;
+    -fx-background-color: #f0f0f0;
+    -fx-translate-y: 105px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 4);
+    -fx-border-color: lightgray;
+    -fx-border-width: 3px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+}
+
+.friends-info-container-title {
+    -fx-translate-x: 20px;
+    -fx-translate-y: 6px;
+}
+
+.sent-requests-container {
+    -fx-min-height: 300px;
+    -fx-pref-height: 300px;
+    -fx-max-height: 300px;
+    -fx-min-width: 600px;
+    -fx-pref-width: 600px;
+    -fx-max-width: 600px;
+    -fx-background-color: #f0f0f0;
+    -fx-translate-y: 100px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 4);
+    -fx-border-color: lightgray;
+    -fx-border-width: 3px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+}
+
+.sent-requests-container-title {
+    -fx-translate-x: 20px;
+    -fx-translate-y: 6px;
+}
+
+.received-requests-container {
+    -fx-min-height: 300px;
+    -fx-pref-height: 300px;
+    -fx-max-height: 300px;
+    -fx-min-width: 600px;
+    -fx-pref-width: 600px;
+    -fx-max-width: 600px;
+    -fx-background-color: #f0f0f0;
+    -fx-translate-y: 100px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 4);
+    -fx-border-color: lightgray;
+    -fx-border-width: 3px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+}
+
+.received-requests-container-title {
+    -fx-translate-x: 20px;
+    -fx-translate-y: 6px;
+}

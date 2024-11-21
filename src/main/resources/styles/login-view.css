@@ -33,7 +33,7 @@
 
 .title-field {
     -fx-font-size: 28px;
-    -fx-fill: #403e3a;
+    -fx-fill: gray;
 }
 
 .text-field {
@@ -55,7 +55,7 @@
     -fx-min-height: 40px;
     -fx-pref-height: 40px;
     -fx-max-height: 40px;
-    -fx-background-color: #3a66ad;
+    -fx-background-color: #90caf9;
     -fx-background-radius: 20px;
     -fx-text-fill: #f0f0f0;
     -fx-border-color: transparent;
@@ -66,11 +66,11 @@
 
 .btn-signup {
     -fx-underline: false;
-    -fx-text-fill: #3a66ad;
+    -fx-text-fill: #90caf9;
 }
 
 .btn-signup-info {
-    -fx-fill: silver;
+    -fx-fill: gray;
 }
 
 .go-to-signup-container {

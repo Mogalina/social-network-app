@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<?import java.net.URL?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.controllers.ProfileViewController"
+            prefHeight="400.0" prefWidth="600.0">
+    <stylesheets>
+        <URL value="@../../styles/profile-view.css" />
+    </stylesheets>
+
+    <fx:include source="../layouts/default-layout.fxml"
+                AnchorPane.topAnchor="0.0"
+                AnchorPane.leftAnchor="0.0"
+                AnchorPane.rightAnchor="0.0" />
+
+    <VBox styleClass="profile-container"
+               AnchorPane.topAnchor="60.0"
+               AnchorPane.bottomAnchor="0.0"
+               AnchorPane.leftAnchor="0.0"
+               AnchorPane.rightAnchor="0.0">
+        <VBox styleClass="profile-info-container">
+            <Region styleClass="linethrough" />
+            <ImageView fitWidth="90.0" fitHeight="90.0"
+                       styleClass="profile-avatar"
+                       preserveRatio="true">
+                <Image url="@../../assets/images/pngs/avatar-icon.png" />
+            </ImageView>
+            <Label styleClass="profile-name"
+                   text="Eric Moghioros" />
+            <Label styleClass="profile-email"
+                   maxWidth="240"
+                   text="eric.moghioros@gmail.com" />
+            <Button styleClass="edit-profile-btn" text="Edit Profile" />
+        </VBox>
+        <VBox styleClass="friends-info-container">
+            <Label styleClass="friends-info-container-title"
+                   text="Friends" />
+        </VBox>
+        <VBox styleClass="sent-requests-container">
+            <Label styleClass="sent-requests-container-title"
+                   text="Sent Requests" />
+        </VBox>
+        <VBox styleClass="received-requests-container">
+            <Label styleClass="received-requests-container-title"
+                   text="Received Requests" />
+        </VBox>
+    </VBox>
+</AnchorPane>

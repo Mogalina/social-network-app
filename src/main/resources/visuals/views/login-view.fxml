@@ -16,7 +16,7 @@
            xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="org.example.controllers.LoginViewController">
     <stylesheets>
-        <URL value="@../styles/login-view.css" />
+        <URL value="@../../styles/login-view.css" />
     </stylesheets>
 
     <VBox styleClass="login-container">

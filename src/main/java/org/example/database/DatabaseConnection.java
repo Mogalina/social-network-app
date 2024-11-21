@@ -32,7 +32,6 @@ public class DatabaseConnection {
     private DatabaseConnection() {
         try {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            // System.out.println("[INFO] Database connection established");
         } catch (SQLException e) {
             System.out.println("[ERROR] Database connection failed. " + e.getMessage());
             System.exit(0);

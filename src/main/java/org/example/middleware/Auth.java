@@ -29,11 +29,6 @@ public class Auth {
 
         String hashedPassword = PasswordUtils.hashPassword(password);
 
-        StreamSupport
-                .stream(network.getAllUsers().spliterator(), false)
-                .forEach(u -> System.out.println(u.getPassword()));
-
-
         Optional<User> user = StreamSupport
                 .stream(network.getAllUsers().spliterator(), false)
                 .filter(u -> Objects.equals(u.getEmail(), email) && Objects.equals(u.getPassword(), hashedPassword))

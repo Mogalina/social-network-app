@@ -1,3 +1,107 @@
 .messages-container {
     -fx-background-color: #f0f0f0;
+    -fx-font-size: 15px;
+    -fx-fill: #403e3a;
+}
+
+.conversations-container {
+    -fx-background-color: #f0f0f0;
+    -fx-border: 0px 1px 0px 0px;
+    -fx-border-color: lightgray;
+    -fx-min-width: 330px;
+    -fx-pref-width: 330px;
+    -fx-max-width: 330px;
+    -fx-alignment: top-center;
+}
+
+.search-bar {
+    -fx-alignment: center;
+    -fx-min-width: 290px;
+    -fx-pref-width: 290px;
+    -fx-max-width: 290px;
+}
+
+.search-bar-input {
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: lightgray;
+    -fx-border-style: solid;
+    -fx-background-color: transparent;
+    -fx-min-width: 270px;
+    -fx-pref-width: 270px;
+    -fx-max-width: 270px;
+    -fx-padding: 0px 33px 10px 0px;
+    -fx-fill: #403e3a;
+    -fx-translate-y: 25px;
+}
+
+.search-bar-icon {
+    -fx-alignment: center-right;
+    -fx-translate-y: 16px;
+    -fx-translate-x: -15px;
+}
+
+.image-view {
+    -fx-cursor: hand;
+}
+
+.friends-container {
+    -fx-background-color: #f0f0f0;
+    -fx-translate-y: 54px;
+}
+
+.friend-container {
+    -fx-alignment: center-left;
+    -fx-spacing: 10px;
+    -fx-background-color: #f0f0f0;
+    -fx-min-width: 330px;
+    -fx-pref-width: 330px;
+    -fx-max-width: 330px;
+    -fx-min-height: 60px;
+    -fx-pref-height: 60px;
+    -fx-max-height: 60px;
+    -fx-border: 1px 0 0 0;
+    -fx-border-color: lightgray;
+    -fx-padding: 0px 30px;
+    -fx-cursor: hand;
+}
+
+.friend-container-email {
+    -fx-min-width: 270px;
+    -fx-pref-width: 270px;
+    -fx-max-width: 270px;
+}
+
+.friend-container-dot {
+    -fx-translate-y: 1px;
+}
+
+.messager-container {
+    -fx-hgrow: always;
+}
+
+.messager {
+    -fx-fill: true;
+    -fx-alignment: center;
+    -fx-min-height: 86px;
+    -fx-pref-height: 86px;
+    -fx-max-height: 86px;
+    -fx-border: 0 0 1px 0;
+    -fx-border-color: lightgray;
+}
+
+.messages {
+    -fx-fill: true;
+    -fx-alignment: center;
+    -fx-border: 0 0 1px 0;
+    -fx-border-color: lightgray;
+}
+
+.messages-options {
+    -fx-fill: true;
+    -fx-alignment: center;
+    -fx-min-height: 86px;
+    -fx-pref-height: 86px;
+    -fx-max-height: 86px;
+    -fx-border: 1px 0 0 0;
+    -fx-border-color: lightgray;
 }

@@ -29,7 +29,7 @@ public class User extends Entity<String> {
         setId(UUID.randomUUID().toString());
         this.firstName = firstName;
         this.lastName = lastName;
-        this.password = PasswordUtils.hashPassword(password);
+        this.password = password;
         this.email = email;
     }
 
