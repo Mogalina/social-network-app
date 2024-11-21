@@ -5,13 +5,15 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
 
 <?import java.net.URL?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.example.controllers.ProfileViewController"
-            prefHeight="400.0" prefWidth="600.0">
+            fx:controller="org.example.controllers.ProfileViewController">
     <stylesheets>
         <URL value="@../../styles/profile-view.css" />
     </stylesheets>
@@ -21,36 +23,129 @@
                 AnchorPane.leftAnchor="0.0"
                 AnchorPane.rightAnchor="0.0" />
 
-    <VBox styleClass="profile-container"
-               AnchorPane.topAnchor="60.0"
-               AnchorPane.bottomAnchor="0.0"
-               AnchorPane.leftAnchor="0.0"
-               AnchorPane.rightAnchor="0.0">
-        <VBox styleClass="profile-info-container">
-            <Region styleClass="linethrough" />
-            <ImageView fitWidth="90.0" fitHeight="90.0"
-                       styleClass="profile-avatar"
-                       preserveRatio="true">
-                <Image url="@../../assets/images/pngs/avatar-icon.png" />
-            </ImageView>
-            <Label styleClass="profile-name"
-                   text="Eric Moghioros" />
-            <Label styleClass="profile-email"
-                   maxWidth="240"
-                   text="eric.moghioros@gmail.com" />
-            <Button styleClass="edit-profile-btn" text="Edit Profile" />
+    <ScrollPane styleClass="main-container"
+                fitToWidth="true"
+                AnchorPane.topAnchor="60.0"
+                AnchorPane.bottomAnchor="0.0"
+                AnchorPane.leftAnchor="0.0"
+                AnchorPane.rightAnchor="0.0">
+        <VBox styleClass="profile-container">
+            <VBox styleClass="profile-info-container">
+                <Region styleClass="linethrough"/>
+                <ImageView fitWidth="90.0" fitHeight="90.0"
+                           styleClass="profile-avatar"
+                           preserveRatio="true">
+                    <Image url="@../../assets/images/pngs/avatar-icon.png"/>
+                </ImageView>
+                <Label styleClass="profile-name"
+                       fx:id="profileName"/>
+                <Label styleClass="profile-email"
+                       maxWidth="240"
+                       fx:id="profileEmail"/>
+                <Button styleClass="edit-profile-btn" text="Edit Profile"/>
+                <Label onMouseClicked="#handleUserLogOut"
+                       styleClass="log-out-btn"
+                       text="Log Out" />
+            </VBox>
+            <VBox styleClass="info-container, friends-info-container">
+                <HBox styleClass="container-nav, container-nav-friends">
+                    <Label styleClass="container-nav-title"
+                           text="Friends"/>
+                    <HBox styleClass="container-nav-options">
+                        <ImageView fitWidth="25.0" fitHeight="25.0"
+                                   preserveRatio="true"
+                                   onMouseClicked="#addNewFriend">
+                            <Image url="@../../assets/images/pngs/add-icon.png" />
+                        </ImageView>
+                        <ImageView fitWidth="25.0" fitHeight="25.0"
+                                   onMouseClicked="#removeExistingFriend"
+                                   preserveRatio="true">
+                            <Image url="@../../assets/images/pngs/remove-icon.png" />
+                        </ImageView>
+                    </HBox>
+                </HBox>
+                <Region styleClass="linethrough-users-box"/>
+                <TableView fx:id="friendsTable"
+                           styleClass="user-table">
+                    <columns>
+                        <TableColumn text="First Name"
+                                     fx:id="firstNameColumn"
+                                     styleClass="table-column" />
+                        <TableColumn text="Last Name"
+                                     fx:id="lastNameColumn"
+                                     styleClass="table-column"/>
+                        <TableColumn text="Email"
+                                     fx:id="emailColumn"
+                                     styleClass="table-column"/>
+                    </columns>
+                </TableView>
+            </VBox>
+            <VBox styleClass="info-container, received-requests-container">
+                <HBox styleClass="container-nav, container-nav-received-requests">
+                    <Label styleClass="container-nav-title"
+                           text="Received Requests"/>
+                    <HBox styleClass="container-nav-options">
+                        <ImageView fitWidth="25.0" fitHeight="25.0"
+                                   onMouseClicked="#acceptFriendRequest"
+                                   preserveRatio="true">
+                            <Image url="@../../assets/images/pngs/accept-icon.png" />
+                        </ImageView>
+                        <ImageView fitWidth="25.0" fitHeight="25.0"
+                                   onMouseClicked="#declineFriendRequest"
+                                   preserveRatio="true">
+                            <Image url="@../../assets/images/pngs/remove-icon.png" />
+                        </ImageView>
+                    </HBox>
+                </HBox>
+                <Region styleClass="linethrough-users-box"/>
+                <TableView fx:id="receivedRequestsTable"
+                           styleClass="user-table">
+                    <columns>
+                        <TableColumn text="First Name"
+                                     fx:id="requestesFirstNameColumn"
+                                     styleClass="table-column" />
+                        <TableColumn text="Last Name"
+                                     fx:id="requestesLastNameColumn"
+                                     styleClass="table-column"/>
+                        <TableColumn text="Email"
+                                     fx:id="requestesEmailColumn"
+                                     styleClass="table-column"/>
+                    </columns>
+                </TableView>
+            </VBox>
+            <VBox styleClass="info-container, sent-requests-container">
+                <HBox styleClass="container-nav, container-nav-sent-requests">
+                    <Label styleClass="container-nav-title"
+                           text="Sent Requests"/>
+                    <HBox styleClass="container-nav-options">
+                        <ImageView fitWidth="25.0" fitHeight="25.0"
+                                   onMouseClicked="#addNewFriend"
+                                   preserveRatio="true">
+                            <Image url="@../../assets/images/pngs/add-icon.png" />
+                        </ImageView>
+                        <ImageView fitWidth="25.0" fitHeight="25.0"
+                                   onMouseClicked="#unsendFriendRequest"
+                                   preserveRatio="true">
+                            <Image url="@../../assets/images/pngs/remove-icon.png" />
+                        </ImageView>
+                    </HBox>
+                </HBox>
+                <Region styleClass="linethrough-users-box"/>
+                <TableView fx:id="sentRequestsTable"
+                           styleClass="user-table">
+                    <columns>
+                        <TableColumn text="First Name"
+                                     fx:id="requestedFirstNameColumn"
+                                     styleClass="table-column" />
+                        <TableColumn text="Last Name"
+                                     fx:id="requestedLastNameColumn"
+                                     styleClass="table-column"/>
+                        <TableColumn text="Email"
+                                     fx:id="requestedEmailColumn"
+                                     styleClass="table-column"/>
+                    </columns>
+                </TableView>
+            </VBox>
         </VBox>
-        <VBox styleClass="friends-info-container">
-            <Label styleClass="friends-info-container-title"
-                   text="Friends" />
-        </VBox>
-        <VBox styleClass="sent-requests-container">
-            <Label styleClass="sent-requests-container-title"
-                   text="Sent Requests" />
-        </VBox>
-        <VBox styleClass="received-requests-container">
-            <Label styleClass="received-requests-container-title"
-                   text="Received Requests" />
-        </VBox>
-    </VBox>
+    </ScrollPane>
 </AnchorPane>

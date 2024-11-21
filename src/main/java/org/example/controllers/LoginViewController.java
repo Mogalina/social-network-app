@@ -27,6 +27,7 @@ public class LoginViewController {
 
         User user = Auth.login(email, password);
         if (user != null) {
+            UserController.setUser(user);
             SceneUtils.switchScene(stage, "/visuals/views/home-view.fxml");
         } else {
             PopupNotification.showNotification(stage, "Invalid email or password", 4000, "#ef5356");

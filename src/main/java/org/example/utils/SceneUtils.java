@@ -27,6 +27,7 @@ public class SceneUtils {
             Scene newScene = new Scene(newRoot);
             stage.setScene(newScene);
             stage.setFullScreen(true);
+            stage.centerOnScreen();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

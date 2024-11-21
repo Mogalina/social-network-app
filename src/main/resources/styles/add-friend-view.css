@@ -1,0 +1,88 @@
+.display-container {
+    -fx-alignment: center;
+    -fx-background-color: #f0f0f0;
+}
+
+.add-friend-container {
+    -fx-alignment: top-center;
+    -fx-translate-y: 50%;
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 20px;
+    -fx-padding: 20px 10px 20px 10px;
+    -fx-max-width: 350px;
+    -fx-pref-width: 350px;
+    -fx-min-width: 350px;
+    -fx-min-height: 450px;
+    -fx-pref-height: 450px;
+    -fx-max-height: 450px;
+    -fx-border-radius: 20px;
+    -fx-border-color: lightgray;
+    -fx-border-width: 3px;
+    -fx-spacing: 30px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 4);
+    -fx-font-size: 15px;
+}
+
+.title-field {
+    -fx-font-size: 28px;
+    -fx-fill: gray;
+}
+
+.confirm-btn {
+    -fx-min-width: 120px;
+    -fx-pref-width: 120px;
+    -fx-max-width: 120px;
+    -fx-min-height: 40px;
+    -fx-pref-height: 40px;
+    -fx-max-height: 40px;
+    -fx-background-color: #90caf9;
+    -fx-background-radius: 20px;
+    -fx-text-fill: #f0f0f0;
+    -fx-border-color: transparent;
+    -fx-border-radius: 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 4);
+    -fx-cursor: hand;
+    -fx-translate-y: -7px;
+}
+
+.search-bar {
+    -fx-alignment: center;
+    -fx-min-width: 290px;
+    -fx-pref-width: 290px;
+    -fx-max-width: 290px;
+    -fx-translate-y: -20px;
+}
+
+.search-bar-input {
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: lightgray;
+    -fx-border-style: solid;
+    -fx-background-color: transparent;
+    -fx-min-width: 270px;
+    -fx-pref-width: 270px;
+    -fx-max-width: 270px;
+    -fx-padding: 0px 33px 10px 0px;
+    -fx-fill: #403e3a;
+    -fx-translate-y: 25px;
+}
+
+.search-bar-icon {
+    -fx-alignment: center-right;
+    -fx-translate-y: 16px;
+    -fx-translate-x: -15px;
+}
+
+.image-view {
+    -fx-cursor: hand;
+}
+
+.results-list {
+    -fx-max-width: 282px;
+    -fx-pref-width: 282px;
+    -fx-min-width: 282px;
+    -fx-background-color: transparent;
+}
+
+.list-cell {
+    -fx-background-color: #f0f0f0;
+}

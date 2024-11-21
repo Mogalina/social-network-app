@@ -227,4 +227,17 @@ public class Network {
                                 .toList()
                 ), HashMap::putAll);
     }
+
+    /**
+     * Finds a user by their email address.
+     *
+     * @param email the email address of the user to find
+     * @return an {@link Optional} containing the user with the specified email address, or an empty {@code Optional} if
+     *         no user is found
+     */
+    public Optional<User> findUserByEmail(String email) {
+        return StreamSupport.stream(getAllUsers().spliterator(), false)
+                .filter(u -> Objects.equals(u.getEmail(), email))
+                .findFirst();
+    }
 }
