@@ -158,6 +158,7 @@ public class ProfileViewController {
             network.deleteFriendRequest(UserController.getUser().getId(), selectedUser.get().getId());
             PopupNotification.showNotification(stage, "Friend removed successfully", 4000, "#68c96d");
             selectedExistingFriendEmail = null;
+            updateFriendsData();
         }
     }
 
@@ -171,6 +172,8 @@ public class ProfileViewController {
             network.sendFriendRequest(UserController.getUser().getId(), selectedUser.get().getId());
             PopupNotification.showNotification(stage, "Request accepted successfully", 4000, "#68c96d");
             selectedExistingReceivedRequestEmail = null;
+            updateReceivedRequestsData();
+            updateFriendsData();
         }
     }
 
@@ -184,6 +187,7 @@ public class ProfileViewController {
             network.deleteFriendRequest(selectedUser.get().getId(), UserController.getUser().getId());
             PopupNotification.showNotification(stage, "Request declined successfully", 4000, "#68c96d");
             selectedExistingReceivedRequestEmail = null;
+            updateReceivedRequestsData();
         }
     }
 
@@ -197,6 +201,19 @@ public class ProfileViewController {
             network.deleteFriendRequest(UserController.getUser().getId(), selectedUser.get().getId());
             PopupNotification.showNotification(stage, "Request unsent successfully", 4000, "#68c96d");
             selectedExistingSentRequestEmail = null;
+            updateSentRequestsData();
         }
+    }
+
+    private void updateFriendsData() {
+        friendsData.setAll(setFriendsData());
+    }
+
+    private void updateSentRequestsData() {
+        sentRequestsData.setAll(setSentRequestsData());
+    }
+
+    private void updateReceivedRequestsData() {
+        receivedResuestsData.setAll(setReceivedRequestsData());
     }
 }

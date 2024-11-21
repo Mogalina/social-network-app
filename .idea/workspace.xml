@@ -6,14 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b50978c8-a92d-4807-aaaa-526228acbbf3" name="Changes" comment="Configure project.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controllers/LoginViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controllers/LoginViewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controllers/ProfileViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controllers/ProfileViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/Friendship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/models/Friendship.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/models/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/Network.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/Network.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/utils/SceneUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/SceneUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/profile-view.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/profile-view.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/visuals/views/profile-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/visuals/views/profile-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,7 +185,8 @@
       <workItem from="1731958163216" duration="16103000" />
       <workItem from="1732112474449" duration="3533000" />
       <workItem from="1732116025803" duration="20100000" />
-      <workItem from="1732194458815" duration="28786000" />
+      <workItem from="1732194458815" duration="28947000" />
+      <workItem from="1732225175427" duration="862000" />
     </task>
     <task id="LOCAL-00001" summary="Configure project.">
       <option name="closed" value="true" />
