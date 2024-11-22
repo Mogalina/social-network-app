@@ -1,6 +1,8 @@
 package org.example.service;
 
+import org.example.models.Observable;
 import org.example.models.Friendship;
+import org.example.models.Observer;
 import org.example.models.Tuple;
 import org.example.models.User;
 
@@ -11,13 +13,16 @@ import java.util.stream.StreamSupport;
 /**
  * Network class that manages users relationships and friendships within a social network.
  */
-public class Network {
+public class Network implements Observable {
 
     // Service to handle and perform operations on User entities
     private final Service<String, User> userService;
 
     // Service to handle and perform operations on Friendship entities
     private final Service<Tuple<String>, Friendship> friendshipService;
+
+    // Store observers to notify when an update occurs
+    List<Observer> observers;
 
     /**
      * Constructs a new Network with the specified {@link UserService} and {@link FriendshipService}.
@@ -28,6 +33,40 @@ public class Network {
     public Network(Service<String, User> userService, Service<Tuple<String>, Friendship> friendshipService) {
         this.userService = userService;
         this.friendshipService = friendshipService;
+        observers = new ArrayList<>();
+    }
+
+    /**
+     * Adds an observer to the list of observers.
+     * This observer will be notified when the observable's state changes.
+     *
+     * @param observer the observer to be added
+     */
+    @Override
+    public void addObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    /**
+     * Removes an observer from the list of observers.
+     * This observer will no longer be notified of any state changes in the observable.
+     *
+     * @param observer the observer to be removed
+     */
+    @Override
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    /**
+     * Notifies all registered observers that the observable's state has changed.
+     * This method will trigger the {@code update} method on each observer.
+     *
+     * @param arg an argument passed by the observable, providing information about the change
+     */
+    @Override
+    public void notifyObservers(Object arg) {
+        observers.forEach(o -> o.update(this, arg));
     }
 
     /**
@@ -49,6 +88,7 @@ public class Network {
      *         system
      */
     public Optional<User> addUser(User user) {
+        notifyObservers(user);
         return userService.save(user);
     }
 
@@ -64,6 +104,7 @@ public class Network {
                 .filter(friendship -> friendship.containsUser(uid))
                 .forEach(friendship -> friendshipService.deleteById(friendship.getId()));
 
+        notifyObservers(uid);
         return userService.deleteById(uid);
     }
 
@@ -74,6 +115,7 @@ public class Network {
      * @return an {@link Optional} containing the updated user, or an empty {@code Optional} if no user is found
      */
     public Optional<User> updateUser(User user) {
+        notifyObservers(user);
         return userService.update(user);
     }
 
@@ -157,9 +199,9 @@ public class Network {
         senderToReceiver.setPending(false);
         friendshipService.save(senderToReceiver);
 
-        Friendship receiverToSender = new Friendship(uid2, uid1);
-        receiverToSender.setPending(false);
-        friendshipService.save(receiverToSender);
+//        Friendship receiverToSender = new Friendship(uid2, uid1);
+//        receiverToSender.setPending(false);
+//        friendshipService.save(receiverToSender);
     }
 
     /**
@@ -182,6 +224,7 @@ public class Network {
                         () -> {
                             Friendship friendRequest = new Friendship(senderId, receiverId);
                             friendshipService.save(friendRequest);
+                            notifyObservers(friendRequest);
                         }
                 );
     }

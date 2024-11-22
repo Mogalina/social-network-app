@@ -1,14 +1,17 @@
 package org.example.controllers;
 
+import org.example.models.Observable;
+import org.example.models.User;
+import org.example.service.Network;
+import org.example.utils.PopupNotification;
+import org.example.models.Observer;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.example.models.User;
-import org.example.service.Network;
-import org.example.utils.PopupNotification;
 
 import java.util.Optional;
 import java.util.List;
@@ -18,7 +21,7 @@ import java.util.stream.StreamSupport;
 /**
  * Controller class that handles adding friends through search functionality.
  */
-public class AddFriendController {
+public class AddFriendController implements Observer {
 
     // The Network instance used for communication with the server
     private Network network;
@@ -43,6 +46,7 @@ public class AddFriendController {
     public void initialize() {
         // Initialize the network connection
         network = GlobalNetwork.getNetwork();
+        network.addObserver(this);
 
         // Fetch all users from the network asynchronously
         fetchAllUsers();
@@ -69,6 +73,17 @@ public class AddFriendController {
                 searchField.setText(selectedItem);
             }
         });
+    }
+
+    /**
+     * This method is called when the observed object is changed.
+     *
+     * @param o the observable object that is notifying the observer
+     * @param arg an argument passed by the observable, providing information about the change
+     */
+    @Override
+    public void update(Observable o, Object arg) {
+        fetchAllUsers();
     }
 
     /**
@@ -124,7 +139,6 @@ public class AddFriendController {
         if (receiver.isPresent()) {
             // Send a friend request to the selected user
             network.sendFriendRequest(UserController.getUser().getId(), receiver.get().getId());
-
             PopupNotification.showNotification(stage, "Request sent successfully", 4000, "#68c96d");
         } else {
             PopupNotification.showNotification(stage, "Invalid email address", 4000, "#ef5356");

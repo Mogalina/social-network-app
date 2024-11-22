@@ -19,7 +19,7 @@ import java.util.Optional;
 /**
  * Controller for managing user profile interactions.
  */
-public class ProfileViewController {
+public class ProfileViewController implements Observer {
 
     // ObservableLists for managing the data displayed in the tables
     private ObservableList<User> friendsData = FXCollections.observableArrayList();
@@ -85,6 +85,7 @@ public class ProfileViewController {
     public void initialize() {
         // Initialize network service
         network = GlobalNetwork.getNetwork();
+        network.addObserver(this);
 
         // Get the current logged-in user
         user = UserController.getUser();
@@ -139,6 +140,19 @@ public class ProfileViewController {
         });
     }
 
+    /**
+     * This method is called when the observed object is changed.
+     *
+     * @param o the observable object that is notifying the observer
+     * @param arg an argument passed by the observable, providing information about the change
+     */
+    @Override
+    public void update(Observable o, Object arg) {
+        friendsData.setAll(setFriendsData());
+        sentRequestsData.setAll(setSentRequestsData());
+        receivedRequestsData.setAll(setReceivedRequestsData());
+    }
+
     // Methods for retrieving and updating the user data displayed in the tables
     private ObservableList<User> setFriendsData() {
         List<User> friendsOfUser = (List<User>) network.getFriendsOfUser(user.getId());
@@ -176,7 +190,7 @@ public class ProfileViewController {
             network.deleteFriendRequest(UserController.getUser().getId(), selectedUser.get().getId());
             PopupNotification.showNotification(stage, "Friend removed successfully", 4000, "#68c96d");
             selectedExistingFriendEmail = null;
-            updateFriendsData();
+            update(network, selectedUser);
         }
     }
 
@@ -190,8 +204,7 @@ public class ProfileViewController {
             network.sendFriendRequest(UserController.getUser().getId(), selectedUser.get().getId());
             PopupNotification.showNotification(stage, "Request accepted successfully", 4000, "#68c96d");
             selectedExistingReceivedRequestEmail = null;
-            updateReceivedRequestsData();
-            updateFriendsData();
+            update(network, selectedUser);
         }
     }
 
@@ -205,7 +218,7 @@ public class ProfileViewController {
             network.deleteFriendRequest(selectedUser.get().getId(), UserController.getUser().getId());
             PopupNotification.showNotification(stage, "Request declined successfully", 4000, "#68c96d");
             selectedExistingReceivedRequestEmail = null;
-            updateReceivedRequestsData();
+            update(network, selectedUser);
         }
     }
 
@@ -219,20 +232,7 @@ public class ProfileViewController {
             network.deleteFriendRequest(UserController.getUser().getId(), selectedUser.get().getId());
             PopupNotification.showNotification(stage, "Request unsent successfully", 4000, "#68c96d");
             selectedExistingSentRequestEmail = null;
-            updateSentRequestsData();
+            update(network, selectedUser);
         }
-    }
-
-    // Methods for refreshing data in the tables
-    private void updateFriendsData() {
-        friendsData.setAll(setFriendsData());
-    }
-
-    private void updateSentRequestsData() {
-        sentRequestsData.setAll(setSentRequestsData());
-    }
-
-    private void updateReceivedRequestsData() {
-        receivedRequestsData.setAll(setReceivedRequestsData());
     }
 }

@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b50978c8-a92d-4807-aaaa-526228acbbf3" name="Changes" comment="Configure project.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controllers/AddFriendController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controllers/AddFriendController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controllers/ProfileViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controllers/ProfileViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/Network.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/Network.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,7 +189,7 @@
       <workItem from="1732116025803" duration="20100000" />
       <workItem from="1732194458815" duration="28947000" />
       <workItem from="1732225175427" duration="1879000" />
-      <workItem from="1732270789552" duration="591000" />
+      <workItem from="1732270789552" duration="2793000" />
     </task>
     <task id="LOCAL-00001" summary="Configure project.">
       <option name="closed" value="true" />
