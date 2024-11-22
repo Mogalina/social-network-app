@@ -168,6 +168,7 @@ public class ProfileViewController {
 
     public void removeExistingFriend() {
         Stage stage = (Stage) profileName.getScene().getWindow();
+
         if (selectedExistingFriendEmail == null) {
             PopupNotification.showNotification(stage, "Please select a friend", 4000, "#ef5356");
         } else {
@@ -181,6 +182,7 @@ public class ProfileViewController {
 
     public void acceptFriendRequest() {
         Stage stage = (Stage) profileName.getScene().getWindow();
+
         if (selectedExistingReceivedRequestEmail == null) {
             PopupNotification.showNotification(stage, "Please select a request", 4000, "#ef5356");
         } else {
@@ -195,6 +197,7 @@ public class ProfileViewController {
 
     public void declineFriendRequest() {
         Stage stage = (Stage) profileName.getScene().getWindow();
+
         if (selectedExistingReceivedRequestEmail == null) {
             PopupNotification.showNotification(stage, "Please select a request", 4000, "#ef5356");
         } else {
@@ -208,6 +211,7 @@ public class ProfileViewController {
 
     public void unsendFriendRequest() {
         Stage stage = (Stage) profileName.getScene().getWindow();
+
         if (selectedExistingSentRequestEmail == null) {
             PopupNotification.showNotification(stage, "Please select a request", 4000, "#ef5356");
         } else {
