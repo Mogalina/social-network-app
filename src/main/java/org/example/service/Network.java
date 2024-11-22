@@ -198,10 +198,6 @@ public class Network implements Observable {
         Friendship senderToReceiver = new Friendship(uid1, uid2);
         senderToReceiver.setPending(false);
         friendshipService.save(senderToReceiver);
-
-//        Friendship receiverToSender = new Friendship(uid2, uid1);
-//        receiverToSender.setPending(false);
-//        friendshipService.save(receiverToSender);
     }
 
     /**
@@ -239,7 +235,10 @@ public class Network implements Observable {
         StreamSupport.stream(friendshipService.findAll().spliterator(), false)
                 .filter(friendship -> friendship.containsUser(senderId) &&
                         friendship.containsUser(receiverId))
-                .forEach(friendship -> friendshipService.deleteById(friendship.getId()));
+                .forEach(friendship -> {
+                    friendshipService.deleteById(friendship.getId());
+                    notifyObservers(friendship);
+                });
     }
 
     /**
