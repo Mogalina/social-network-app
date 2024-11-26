@@ -3,7 +3,6 @@ package org.example.repository.database;
 import org.example.database.DatabaseConnection;
 import org.example.models.User;
 import org.example.models.validators.Validator;
-import org.example.utils.PasswordUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

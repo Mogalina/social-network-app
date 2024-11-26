@@ -26,7 +26,7 @@ public class StartApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 900, 600);
         primaryStage.setTitle("Social Network");
         primaryStage.setScene(scene);
-        primaryStage.setFullScreen(true);
+        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 
