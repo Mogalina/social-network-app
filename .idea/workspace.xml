@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b50978c8-a92d-4807-aaaa-526228acbbf3" name="Changes" comment="Configure project.">
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/StartApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/StartApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/Friendship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/models/Friendship.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/database/UserDatabaseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/database/UserDatabaseRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/utils/SceneUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/SceneUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,7 +192,8 @@
       <workItem from="1732554870480" duration="21000" />
       <workItem from="1732564983998" duration="73000" />
       <workItem from="1732570992914" duration="3801000" />
-      <workItem from="1732612092218" duration="2100000" />
+      <workItem from="1732612092218" duration="2903000" />
+      <workItem from="1732639895466" duration="2686000" />
     </task>
     <task id="LOCAL-00001" summary="Configure project.">
       <option name="closed" value="true" />
