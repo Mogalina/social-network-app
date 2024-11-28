@@ -21,7 +21,7 @@ public class MessageDatabaseRepository extends AbstractDatabaseRepository<String
     /**
      * Constructs a new {@code MessageDatabaseRepository} with the specified {@link Validator}.
      *
-     * @param validator the validator used to validate {@link User} entities
+     * @param validator the validator used to validate {@link Message} entities
      */
     public MessageDatabaseRepository(Validator<Message> validator) {
         super(validator);

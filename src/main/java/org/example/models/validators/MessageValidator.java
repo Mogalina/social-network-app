@@ -9,11 +9,12 @@ import java.util.Optional;
 
 /**
  * Validator responsible for validating {@link Message} entities.
- * This class implement the Validator interface for the User type.
+ * This class implement the Validator interface for the Message type.
  */
 public class MessageValidator implements Validator<Message> {
 
-    private final Repository<String, User> userRepository; // Repository for retrieving User entities
+    // Repository for retrieving User entities
+    private final Repository<String, User> userRepository;
 
     /**
      * Constructs a new MessageValidator with a reference to {@link Repository} of {@link User} entities.
@@ -37,7 +38,7 @@ public class MessageValidator implements Validator<Message> {
      * </ul>
      *
      * @param message the entity to be validated
-     * @throws ValidationException if the user is null or fails validation criteria
+     * @throws ValidationException if the message is null or fails validation criteria
      */
     @Override
     public void validate(Message message) throws ValidationException {

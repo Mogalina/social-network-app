@@ -22,22 +22,28 @@ public class Network implements Observable {
     // Service to handle and perform operations on Message entities
     private final Service<String, Message> messageService;
 
+    // Service to handle and perform operations on Notification entities
+    private final Service<String, Notification> notificationService;
+
     // Store observers to notify when an update occurs
     List<Observer> observers;
 
     /**
-     * Constructs a new Network with the specified {@link UserService} and {@link FriendshipService}.
+     * Constructs a new Network with the specified services..
      *
      * @param userService the service used to perform operations on {@link User} entities
      * @param friendshipService the service used to perform operations on {@link Friendship} entities
      * @param messageService the service used to perform operations on {@link Message} entities
+     * @param notificationService the service used to perform operations on {@link Notification} entities
      */
     public Network(Service<String, User> userService,
                    Service<Tuple<String>, Friendship> friendshipService,
-                   Service<String, Message> messageService) {
+                   Service<String, Message> messageService,
+                   Service<String, Notification> notificationService) {
         this.userService = userService;
         this.friendshipService = friendshipService;
         this.messageService = messageService;
+        this.notificationService = notificationService;
         observers = new ArrayList<>();
     }
 
@@ -331,7 +337,7 @@ public class Network implements Observable {
     }
 
     /**
-     * Finds a message by their identifier.
+     * Finds a message by its identifier.
      *
      * @param id the identifier of the message to find
      * @return an {@link Optional} containing the message with the specified ID, or an empty {@code Optional} if no
@@ -374,5 +380,73 @@ public class Network implements Observable {
         Optional<Message> deletedMessage = messageService.deleteById(id);
         notifyObservers(deletedMessage);
         return deletedMessage;
+    }
+
+    /**
+     * Finds a notification by its identifier.
+     *
+     * @param id the identifier of the notification to find
+     * @return an {@link Optional} containing the notification with the specified ID, or an empty {@code Optional} if no
+     *         notification is found
+     */
+    public Optional<Notification> findNotification(String id) {
+        return notificationService.findById(id);
+    }
+
+    /**
+     * Adds a new notification to the network.
+     *
+     * @param notification the {@link Notification} to be added
+     * @return an {@link Optional} containing the saved notification
+     */
+    public Optional<Notification> addNotification(Notification notification) {
+        notifyObservers(notification);
+        return notificationService.save(notification);
+    }
+
+    /**
+     * Updates an existing notification's information.
+     *
+     * @param notification the notification with updated information
+     * @return an {@link Optional} containing the updated notification, or an empty {@code Optional} if no notification
+     *         is found
+     */
+    public Optional<Notification> updateNotification(Notification notification) {
+        notifyObservers(notification);
+        return notificationService.update(notification);
+    }
+
+    /**
+     * Deletes a notification from the network.
+     *
+     * @param id the identifier of the notification to be deleted
+     * @return an {@link Optional} containing the notification with the specified ID, or an empty {@code Optional} if no
+     *         notification is found
+     */
+    public Optional<Notification> deleteNotification(String id) {
+        Optional<Notification> deletedNotification = notificationService.deleteById(id);
+        notifyObservers(deletedNotification);
+        return deletedNotification;
+    }
+
+    /**
+     * Returns all notifications in the network.
+     *
+     * @return a list of all notification
+     */
+    public Iterable<Notification> getAllNotifications() {
+        return notificationService.findAll();
+    }
+
+    /**
+     * Returns all notifications for a specficied user by its identifier.
+     *
+     * @param uid the unique identifier of the user
+     * @return a list of notifications for the user
+     */
+    public Iterable<Notification> getUserNotifications(String uid) {
+        return StreamSupport.stream(getAllNotifications().spliterator(), false)
+                .filter(notification -> Objects.equals(notification.getUserId(), uid))
+                .collect(Collectors.toList());
     }
 }

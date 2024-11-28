@@ -1,16 +1,11 @@
 package org.example.controllers;
 
-import org.example.models.Friendship;
-import org.example.models.Message;
-import org.example.models.Tuple;
-import org.example.models.User;
-import org.example.models.validators.FriendshipValidator;
-import org.example.models.validators.MessageValidator;
-import org.example.models.validators.UserValidator;
-import org.example.models.validators.Validator;
+import org.example.models.*;
+import org.example.models.validators.*;
 import org.example.repository.Repository;
 import org.example.repository.database.FriendshipDatabaseRepository;
 import org.example.repository.database.MessageDatabaseRepository;
+import org.example.repository.database.NotificationDatabaseRepository;
 import org.example.repository.database.UserDatabaseRepository;
 import org.example.service.*;
 
@@ -43,7 +38,11 @@ public class GlobalNetwork {
             Repository<String, Message> messageRepository = new MessageDatabaseRepository(messageValidator);
             Service<String, Message> messageService = new MessageService(messageRepository);
 
-            network = new Network(userService, friendshipService, messageService);
+            Validator<Notification> notificationValidator = new NotificationValidator(userRepository);
+            Repository<String, Notification> notificationRepository = new NotificationDatabaseRepository(notificationValidator);
+            Service<String, Notification> notificationService = new NotificationService(notificationRepository);
+
+            network = new Network(userService, friendshipService, messageService, notificationService);
         }
 
         return network;

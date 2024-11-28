@@ -17,16 +17,27 @@ public class Notification extends Entity<String> {
 
     private final StringProperty description;
     private final ObjectProperty<LocalDateTime> date;
+    private final StringProperty userId;
 
     /**
-     * Constructs a new {@link Notification} object with the specificed description.
+     * Constructs a new {@link Notification} object with the specificed description and user identifier.
      * The timestamp is marked as current as default.
      *
      * @param description the description of the notification
      */
-    public Notification(String description) {
+    public Notification(String description, String userId) {
         this.description = new SimpleStringProperty(description);
         this.date = new SimpleObjectProperty<>(LocalDateTime.now());
+        this.userId = new SimpleStringProperty(userId);
+    }
+
+    /**
+     * Returns the property object for the notification user identifier.
+     *
+     * @return the notification user ifentifier property
+     */
+    public StringProperty userIdProperty() {
+        return userId;
     }
 
     /**
@@ -48,6 +59,15 @@ public class Notification extends Entity<String> {
     }
 
     /**
+     * Returns the user identifier of the notification.
+     *
+     * @return the user identifier of the notification
+     */
+    public String getUserId() {
+        return userId.get();
+    }
+
+    /**
      * Returns the description of the notification.
      *
      * @return the description of the notification
@@ -57,12 +77,30 @@ public class Notification extends Entity<String> {
     }
 
     /**
+     * Sets the description of the notification.
+     *
+     * @param description the new description of the notification
+     */
+    public void setDescription(String description) {
+        this.description.set(description);
+    }
+
+    /**
      * Returns the timestamp of the notification.
      *
      * @return the timestamp of the notification
      */
     public LocalDateTime getDate() {
         return date.get();
+    }
+
+    /**
+     * Sets the timestamp of the notification.
+     *
+     * @param date the new timestamp of the notification
+     */
+    public void setDate(LocalDateTime date) {
+        this.date.set(date);
     }
 
     /**
@@ -76,7 +114,8 @@ public class Notification extends Entity<String> {
         return "@NOTIFICATION | " +
                 "ID <" + getId() + ">" +
                 "\n              | DESCRIPTION <" + getDescription() + ">" +
-                "\n              | DATE <" + getDate() + ">";
+                "\n              | DATE <" + getDate() + ">" +
+                "\n              | USER ID <" + getUserId() + ">";
     }
 
     /**
@@ -96,12 +135,13 @@ public class Notification extends Entity<String> {
     }
 
     /**
-     * Returns the hash code of this {@link Notification} object, based on its IDs, description and timestamp.
+     * Returns the hash code of this {@link Notification} object, based on its IDs, description, timestamp and user
+     * identifier.
      *
      * @return the hash code value of the notification
      */
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getDescription(), getDate());
+        return Objects.hash(getId(), getDescription(), getDate(), getUserId());
     }
 }
