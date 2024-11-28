@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MessageDatabaseRepository extends AbstractDatabaseRepository<String, Message> {
 
@@ -66,7 +68,7 @@ public class MessageDatabaseRepository extends AbstractDatabaseRepository<String
         preparedStatement.setObject(1, java.util.UUID.fromString(entity.getSenderId()));
         preparedStatement.setObject(2, java.util.UUID.fromString(entity.getReceiverId()));
         preparedStatement.setString(3, entity.getMessage());
-        preparedStatement.setTimestamp(3, java.sql.Timestamp.valueOf(entity.getDate()));
+        preparedStatement.setTimestamp(4, java.sql.Timestamp.valueOf(entity.getDate()));
         return preparedStatement;
     }
 
@@ -100,6 +102,47 @@ public class MessageDatabaseRepository extends AbstractDatabaseRepository<String
         preparedStatement.setString(3, entity.getMessage());
         preparedStatement.setTimestamp(4, java.sql.Timestamp.valueOf(entity.getDate()));
         return preparedStatement;
+    }
+
+    /**
+     * Prepares a SQL statement to retrieve messages sent from a user to another.
+     *
+     * @param senderId the unique identifier of the sender {@link User}
+     * @param receiverId the unique identifier of the receiver {@link User}
+     * @return a PreparedStatement configured to retrieve the sent messages
+     * @throws SQLException if a database access error occurs
+     */
+    private PreparedStatement getSentQuery(String senderId, String receiverId) throws SQLException {
+        String query = "SELECT * FROM messages WHERE sid = ? AND rid = ?";
+        PreparedStatement preparedStatement = databaseConnection.prepareStatement(query);
+        preparedStatement.setObject(1, java.util.UUID.fromString(senderId));
+        preparedStatement.setObject(2, java.util.UUID.fromString(receiverId));
+        return preparedStatement;
+    }
+
+    /**
+     * Retrieves all messages from the database send between two users.
+     *
+     * @param senderId the unique identifier of the sender {@link User}
+     * @param receiverId the unique identifier of the receiver {@link User}
+     * @return an iterable collection of all sent messages
+     * @throws RuntimeException if an SQL error occurs while trying to execute the query
+     */
+    public Iterable<Message> getSent(String senderId, String receiverId) throws SQLException {
+        List<Message> messages = new ArrayList<>();
+
+        try (PreparedStatement statement = getSentQuery(senderId, receiverId)) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Message message = buildEntity(resultSet);
+                    messages.add(message);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return messages;
     }
 
     /**

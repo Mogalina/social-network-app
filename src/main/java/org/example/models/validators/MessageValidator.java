@@ -33,6 +33,7 @@ public class MessageValidator implements Validator<Message> {
      *     <li>Both sender and receiver must exist in the network.</li>
      *     <li>Sender and receiver must not be te same user.</li>
      *     <li>Text message must be at leat one character long.</li>
+     *     <li>Text message must be less than 1000 characters long.</li>
      * </ul>
      *
      * @param message the entity to be validated
@@ -63,8 +64,14 @@ public class MessageValidator implements Validator<Message> {
             throw new ValidationException("Sender and Receiver must not be the same");
         }
 
+        // Check if message text is empty
         if (message.getMessage().isEmpty()) {
             throw new ValidationException("Message must not be empty");
+        }
+
+        // Check if message text is more than 1000 characters long
+        if (message.getMessage().length() >= 1000) {
+            throw new ValidationException("Message must be less than 1000 characters");
         }
     }
 }

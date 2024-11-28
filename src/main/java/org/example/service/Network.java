@@ -1,10 +1,8 @@
 package org.example.service;
 
+import org.example.models.*;
 import org.example.models.Observable;
-import org.example.models.Friendship;
 import org.example.models.Observer;
-import org.example.models.Tuple;
-import org.example.models.User;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -21,6 +19,9 @@ public class Network implements Observable {
     // Service to handle and perform operations on Friendship entities
     private final Service<Tuple<String>, Friendship> friendshipService;
 
+    // Service to handle and perform operations on Message entities
+    private final Service<String, Message> messageService;
+
     // Store observers to notify when an update occurs
     List<Observer> observers;
 
@@ -29,10 +30,14 @@ public class Network implements Observable {
      *
      * @param userService the service used to perform operations on {@link User} entities
      * @param friendshipService the service used to perform operations on {@link Friendship} entities
+     * @param messageService the service used to perform operations on {@link Message} entities
      */
-    public Network(Service<String, User> userService, Service<Tuple<String>, Friendship> friendshipService) {
+    public Network(Service<String, User> userService,
+                   Service<Tuple<String>, Friendship> friendshipService,
+                   Service<String, Message> messageService) {
         this.userService = userService;
         this.friendshipService = friendshipService;
+        this.messageService = messageService;
         observers = new ArrayList<>();
     }
 
@@ -104,8 +109,9 @@ public class Network implements Observable {
                 .filter(friendship -> friendship.containsUser(uid))
                 .forEach(friendship -> friendshipService.deleteById(friendship.getId()));
 
-        notifyObservers(uid);
-        return userService.deleteById(uid);
+        Optional<User> deletedUser = userService.deleteById(uid);
+        notifyObservers(deletedUser);
+        return deletedUser;
     }
 
     /**
@@ -281,5 +287,92 @@ public class Network implements Observable {
         return StreamSupport.stream(getAllUsers().spliterator(), false)
                 .filter(u -> Objects.equals(u.getEmail(), email))
                 .findFirst();
+    }
+
+    /**
+     * Retrieves all messages in the network.
+     *
+     * @return an iterable collection of all {@link Message} entities.
+     */
+    public Iterable<Message> getAllMessages() {
+        return messageService.findAll();
+    }
+
+    /**
+     * Retrieves all messages from the database that were sent from a user to another.
+     *
+     * @param senderId the unique identifier of the sender {@link User}
+     * @param receiverId the unique identifier of the receiver {@link User}
+     * @return an iterable collection of all sent from a user to another
+     */
+    public Iterable<Message> getSentMessages(String senderId, String receiverId) {
+        return StreamSupport.stream(this.getAllMessages().spliterator(), false)
+                .filter(message -> Objects.equals(message.getSenderId(), senderId) &&
+                        Objects.equals(message.getReceiverId(), receiverId))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Retrieves all messages from the database between two users, in the order they were sent.
+     *
+     * @param uid1 the unique identifier of the {@link User}
+     * @param uid2 the unique identifier of the {@link User}
+     * @return an iterable collection of all messages between two users
+     */
+    public Iterable<Message> getChat(String uid1, String uid2) {
+        List<Message> sentMessages = StreamSupport.stream(this.getSentMessages(uid1, uid2).spliterator(), false)
+                .collect(Collectors.toList());
+        List<Message> recvMessages = StreamSupport.stream(this.getSentMessages(uid2, uid1).spliterator(), false)
+                .toList();
+
+        sentMessages.addAll(recvMessages);
+        sentMessages.sort(Comparator.comparing(Message::getDate));
+        return sentMessages;
+    }
+
+    /**
+     * Finds a message by their identifier.
+     *
+     * @param id the identifier of the message to find
+     * @return an {@link Optional} containing the message with the specified ID, or an empty {@code Optional} if no
+     *         message is found
+     */
+    public Optional<Message> findMessage(String id) {
+        return messageService.findById(id);
+    }
+
+    /**
+     * Adds a new message to the network.
+     *
+     * @param message the {@link Message} to be added
+     * @return an {@link Optional} containing the saved message
+     */
+    public Optional<Message> addMessage(Message message) {
+        notifyObservers(message);
+        return messageService.save(message);
+    }
+
+    /**
+     * Updates an existing message's information.
+     *
+     * @param message the message with updated information
+     * @return an {@link Optional} containing the updated message, or an empty {@code Optional} if no message is found
+     */
+    public Optional<Message> updateMessage(Message message) {
+        notifyObservers(message);
+        return messageService.update(message);
+    }
+
+    /**
+     * Deletes a message from the network.
+     *
+     * @param id the identifier of the message to be deleted
+     * @return an {@link Optional} containing the message with the specified ID, or an empty {@code Optional} if no
+     *         message is found
+     */
+    public Optional<Message> deleteMessage(String id) {
+        Optional<Message> deletedMessage = messageService.deleteById(id);
+        notifyObservers(deletedMessage);
+        return deletedMessage;
     }
 }

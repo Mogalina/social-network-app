@@ -1,18 +1,18 @@
 package org.example.controllers;
 
 import org.example.models.Friendship;
+import org.example.models.Message;
 import org.example.models.Tuple;
 import org.example.models.User;
 import org.example.models.validators.FriendshipValidator;
+import org.example.models.validators.MessageValidator;
 import org.example.models.validators.UserValidator;
 import org.example.models.validators.Validator;
 import org.example.repository.Repository;
 import org.example.repository.database.FriendshipDatabaseRepository;
+import org.example.repository.database.MessageDatabaseRepository;
 import org.example.repository.database.UserDatabaseRepository;
-import org.example.service.FriendshipService;
-import org.example.service.Network;
-import org.example.service.Service;
-import org.example.service.UserService;
+import org.example.service.*;
 
 /**
  * A singleton-like class to manage a shared {@link Network} instance.
@@ -39,7 +39,11 @@ public class GlobalNetwork {
             Repository<Tuple<String>, Friendship> friendshipRepository = new FriendshipDatabaseRepository(friendshipValidator);
             Service<Tuple<String>, Friendship> friendshipService = new FriendshipService(friendshipRepository);
 
-            network = new Network(userService, friendshipService);
+            Validator<Message> messageValidator = new MessageValidator(userRepository);
+            Repository<String, Message> messageRepository = new MessageDatabaseRepository(messageValidator);
+            Service<String, Message> messageService = new MessageService(messageRepository);
+
+            network = new Network(userService, friendshipService, messageService);
         }
 
         return network;

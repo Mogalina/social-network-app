@@ -82,7 +82,7 @@ public class FriendshipDatabaseRepository extends AbstractDatabaseRepository<Tup
      */
     @Override
     protected PreparedStatement findAllQuery() throws SQLException {
-        String query = "SELECT * FROM friendships";
+        String query = "SELECT * FROM friendships ORDER BY date ASC";
         return databaseConnection.prepareStatement(query);
     }
 

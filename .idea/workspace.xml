@@ -5,8 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b50978c8-a92d-4807-aaaa-526228acbbf3" name="Changes" comment="Configure project.">
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controllers/GlobalNetwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controllers/GlobalNetwork.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controllers/MessagesViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controllers/MessagesViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/validators/MessageValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/models/validators/MessageValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/database/AbstractDatabaseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/database/AbstractDatabaseRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/database/FriendshipDatabaseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/database/FriendshipDatabaseRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/database/MessageDatabaseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/database/MessageDatabaseRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/Network.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/Network.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/messages-view.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/messages-view.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/visuals/views/messages-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/visuals/views/messages-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,7 +202,8 @@
       <workItem from="1732564983998" duration="73000" />
       <workItem from="1732570992914" duration="3801000" />
       <workItem from="1732612092218" duration="2903000" />
-      <workItem from="1732639895466" duration="2686000" />
+      <workItem from="1732639895466" duration="6835000" />
+      <workItem from="1732806763075" duration="17728000" />
     </task>
     <task id="LOCAL-00001" summary="Configure project.">
       <option name="closed" value="true" />

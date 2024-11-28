@@ -110,7 +110,6 @@ public abstract class AbstractDatabaseRepository<ID, E extends Entity<ID>> imple
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     E entity = buildEntity(resultSet);
-                    entity.setId(id);
                     return Optional.of(entity);
                 }
             }
@@ -134,9 +133,7 @@ public abstract class AbstractDatabaseRepository<ID, E extends Entity<ID>> imple
         try (PreparedStatement statement = findAllQuery()) {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    ID id = (ID) resultSet.getObject("id").toString();
                     E entity = buildEntity(resultSet);
-                    entity.setId(id);
                     entities.add(entity);
                 }
             }
