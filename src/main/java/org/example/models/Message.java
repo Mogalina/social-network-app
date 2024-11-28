@@ -10,8 +10,6 @@ import java.util.Objects;
 
 /**
  * Represents a {@code Message} entity exchanged between two users.
- * Each message contains the sender's ID, receiver's ID, the content of the message, and a timestamp indicating when the
- * message was created or last modified.
  *
  * The {@code User} extends the {@code Entity} base class, using {@code String} as the type of its identifier.
  */
@@ -164,8 +162,7 @@ public class Message extends Entity<String> {
 
     /**
      * Compares this friendship with another object for equality.
-     * Two friendship requests are considered equal if their IDs, sender ids, receiver ids, text message and a timestamp
-     * indicating when the message was sent.
+     * Two friendship requests are considered equal if their IDs and timestamps are equal.
      *
      * @param o the object to be compared
      * @return {@code true} if this friendship is equal to the object, {@code false} otherwise
@@ -177,10 +174,7 @@ public class Message extends Entity<String> {
 
         Message message = (Message) o;
         return Objects.equals(getId(), message.getId()) &&
-                Objects.equals(getSenderId(), message.getSenderId()) &&
-                Objects.equals(getReceiverId(), message.getReceiverId()) &&
-                Objects.equals(getDate(), message.getDate()) &&
-                Objects.equals(getMessage(), message.getMessage());
+                Objects.equals(getDate(), message.getDate());
     }
 
     /**
