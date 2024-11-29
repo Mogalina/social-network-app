@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Button?>
+
+
+<?import java.net.URL?>
+
+<StackPane styleClass="display-container"
+           xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="org.example.controllers.NotificationsController">
+    <stylesheets>
+        <URL value="@../../styles/notifications-view.css" />
+    </stylesheets>
+
+    <fx:include source="../layouts/default-layout.fxml"
+                AnchorPane.topAnchor="0.0"
+                AnchorPane.leftAnchor="0.0"
+                AnchorPane.rightAnchor="0.0" />
+
+    <VBox styleClass="notifications-container">
+        <Text text="Notifications" styleClass="title-field" />
+        <Text text="No recent notifications" fx:id="noNotificationsText" styleClass="no-notification-text" />
+        <ListView fx:id="notificationsList" styleClass="notifications-list" />
+        <Button fx:id="confirmBtn"
+                styleClass="confirm-btn"
+                text="Mark Read"
+                onAction="#handleMarkNotifications" />
+    </VBox>
+</StackPane>

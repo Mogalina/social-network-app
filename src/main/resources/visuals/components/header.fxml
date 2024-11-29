@@ -37,10 +37,14 @@
         </HBox>
         <Region HBox.hgrow="ALWAYS"/>
         <HBox styleClass="profile-options">
-            <ImageView fitWidth="32.0" fitHeight="32.0"
-                       preserveRatio="true">
-                <Image url="@../../assets/images/pngs/notifications-icon.png" />
-            </ImageView>
+            <StackPane>
+                <ImageView fitWidth="32.0" fitHeight="32.0"
+                           preserveRatio="true"
+                           fx:id="notificationsImage"
+                           onMouseClicked="#goToNotifications">
+                    <Image url="@../../assets/images/pngs/notifications-icon.png" />
+                </ImageView>
+            </StackPane>
             <ImageView fitWidth="32.0" fitHeight="32.0"
                        fx:id="profileImage"
                        onMouseClicked="#goToProfile"

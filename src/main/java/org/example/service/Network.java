@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.exceptions.EntityAlreadyExistsException;
 import org.example.models.*;
 import org.example.models.Observable;
 import org.example.models.Observer;
@@ -115,6 +116,15 @@ public class Network implements Observable {
                 .filter(friendship -> friendship.containsUser(uid))
                 .forEach(friendship -> friendshipService.deleteById(friendship.getId()));
 
+        StreamSupport.stream(notificationService.findAll().spliterator(), false)
+                .filter(notification -> Objects.equals(notification.getUserId(), uid))
+                .forEach(notification -> deleteNotification(notification.getId()));
+
+        StreamSupport.stream(messageService.findAll().spliterator(), false)
+                .filter(message -> Objects.equals(message.getReceiverId(), uid) ||
+                        Objects.equals(message.getSenderId(), uid))
+                .forEach(message -> deleteMessage(message.getId()));
+
         Optional<User> deletedUser = userService.deleteById(uid);
         notifyObservers(deletedUser);
         return deletedUser;
@@ -212,13 +222,27 @@ public class Network implements Observable {
         friendshipService.save(senderToReceiver);
     }
 
+    public Optional<Friendship> findFriendship(String uid1, String uid2) {
+        return friendshipService.findById(new Tuple<>(uid1, uid2));
+    }
+
     /**
      * Sends a friend request from one user to another.
      *
      * @param senderId the identifier of the user sending the friend request
      * @param receiverId the identifier of the user receiving the friend request
+     * @throws EntityAlreadyExistsException if friend request is already sent or friend already exists
      */
-    public void sendFriendRequest(String senderId, String receiverId) {
+    public void sendFriendRequest(String senderId, String receiverId) throws EntityAlreadyExistsException {
+        Optional<Friendship> friendshipRequest = findFriendship(senderId, receiverId);
+        if (friendshipRequest.isPresent()) {
+            if (friendshipRequest.get().isPending()) {
+                throw new EntityAlreadyExistsException("Request already sent");
+            } else {
+                throw new EntityAlreadyExistsException("You are already friends");
+            }
+        }
+
         StreamSupport.stream(friendshipService.findAll().spliterator(), false)
                 .filter(friendship -> friendship.containsUser(senderId) &&
                         friendship.containsUser(receiverId) &&
@@ -230,11 +254,17 @@ public class Network implements Observable {
                             makeFriendship(senderId, receiverId);
                         },
                         () -> {
-                            Friendship friendRequest = new Friendship(senderId, receiverId);
-                            friendshipService.save(friendRequest);
-                            notifyObservers(friendRequest);
+                            Friendship request = new Friendship(senderId, receiverId);
+                            friendshipService.save(request);
+                            notifyObservers(request);
                         }
                 );
+
+        Optional<User> sender = findUser(senderId);
+        String notificationDescription = "Request from " + sender.get().getEmail();
+        Notification notification = new Notification(notificationDescription, receiverId);
+        notificationService.save(notification);
+        notifyObservers(notification);
     }
 
     /**
@@ -354,6 +384,12 @@ public class Network implements Observable {
      * @return an {@link Optional} containing the saved message
      */
     public Optional<Message> addMessage(Message message) {
+        Optional<User> receiver = findUser(message.getReceiverId());
+        String notificationDescription = "Message from " + receiver.get().getEmail();
+        Notification notification = new Notification(notificationDescription, receiver.get().getId());
+        notificationService.save(notification);
+        notifyObservers(notification);
+
         notifyObservers(message);
         return messageService.save(message);
     }

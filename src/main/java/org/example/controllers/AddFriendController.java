@@ -1,5 +1,6 @@
 package org.example.controllers;
 
+import org.example.exceptions.EntityAlreadyExistsException;
 import org.example.models.Observable;
 import org.example.models.User;
 import org.example.service.Network;
@@ -126,7 +127,7 @@ public class AddFriendController implements Observer {
     /**
      * Handles the action of sending a friend request to the user entered in the search field.
      */
-    public void handleAddFriend() {
+    public void handleAddFriend() throws EntityAlreadyExistsException {
         // Get the current window's stage
         Stage stage = (Stage) searchField.getScene().getWindow();
 
@@ -138,8 +139,13 @@ public class AddFriendController implements Observer {
 
         if (receiver.isPresent()) {
             // Send a friend request to the selected user
-            network.sendFriendRequest(UserController.getUser().getId(), receiver.get().getId());
-            PopupNotification.showNotification(stage, "Request sent successfully", 4000, "#68c96d");
+            try {
+                network.sendFriendRequest(UserController.getUser().getId(), receiver.get().getId());
+                PopupNotification.showNotification(stage, "Request sent successfully", 4000, "#68c96d");
+            } catch (EntityAlreadyExistsException e) {
+                PopupNotification.showNotification(stage, e.getMessage(), 4000, "#ef5356");
+            }
+
         } else {
             PopupNotification.showNotification(stage, "Invalid email address", 4000, "#ef5356");
         }

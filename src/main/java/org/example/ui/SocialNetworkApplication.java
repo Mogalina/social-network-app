@@ -1,5 +1,6 @@
 package org.example.ui;
 
+import org.example.exceptions.EntityAlreadyExistsException;
 import org.example.models.Friendship;
 import org.example.models.User;
 import org.example.service.Community;
@@ -226,7 +227,7 @@ public class SocialNetworkApplication {
         try {
             network.sendFriendRequest(senderId, receiverId);
             System.out.println("[INFO] Friend request sent successfully");
-        } catch (Exception e) {
+        } catch (Exception | EntityAlreadyExistsException e) {
             System.out.println("[ERROR] " + e.getMessage());
         }
     }

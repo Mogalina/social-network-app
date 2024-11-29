@@ -1,0 +1,66 @@
+.display-container {
+    -fx-alignment: center;
+    -fx-background-color: #f0f0f0;
+}
+
+.notifications-container {
+    -fx-alignment: top-center;
+    -fx-translate-y: 50%;
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 20px;
+    -fx-padding: 20px 10px 20px 10px;
+    -fx-max-width: 350px;
+    -fx-pref-width: 350px;
+    -fx-min-width: 350px;
+    -fx-min-height: 450px;
+    -fx-pref-height: 450px;
+    -fx-max-height: 450px;
+    -fx-border-radius: 20px;
+    -fx-border-color: lightgray;
+    -fx-border-width: 3px;
+    -fx-spacing: 30px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 4);
+    -fx-font-size: 15px;
+}
+
+.title-field {
+    -fx-font-size: 28px;
+    -fx-fill: gray;
+}
+
+.image-view {
+    -fx-cursor: hand;
+}
+
+.notifications-list {
+    -fx-max-width: 282px;
+    -fx-pref-width: 282px;
+    -fx-min-width: 282px;
+    -fx-background-color: transparent;
+}
+
+.list-cell {
+    -fx-background-color: #f0f0f0;
+}
+
+.confirm-btn {
+    -fx-min-width: 120px;
+    -fx-pref-width: 120px;
+    -fx-max-width: 120px;
+    -fx-min-height: 40px;
+    -fx-pref-height: 40px;
+    -fx-max-height: 40px;
+    -fx-background-color: #90caf9;
+    -fx-background-radius: 20px;
+    -fx-text-fill: #f0f0f0;
+    -fx-border-color: transparent;
+    -fx-border-radius: 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 4);
+    -fx-cursor: hand;
+    -fx-translate-y: -7px;
+}
+
+.no-notification-text {
+    -fx-alignment: center;
+    -fx-translate-y: 130px;
+}

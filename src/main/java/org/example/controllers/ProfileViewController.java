@@ -1,5 +1,6 @@
 package org.example.controllers;
 
+import org.example.exceptions.EntityAlreadyExistsException;
 import org.example.models.*;
 import org.example.service.Network;
 import org.example.utils.PopupNotification;
@@ -194,7 +195,7 @@ public class ProfileViewController implements Observer {
         }
     }
 
-    public void acceptFriendRequest() {
+    public void acceptFriendRequest() throws EntityAlreadyExistsException {
         Stage stage = (Stage) profileName.getScene().getWindow();
 
         if (selectedExistingReceivedRequestEmail == null) {
