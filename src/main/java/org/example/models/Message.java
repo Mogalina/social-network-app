@@ -7,6 +7,7 @@ import javafx.beans.property.StringProperty;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Represents a {@code Message} entity exchanged between two users.
@@ -29,6 +30,7 @@ public class Message extends Entity<String> {
      * @param message the content of the message
      */
     public Message(String senderId, String receiverId, String message) {
+        setId(UUID.randomUUID().toString());
         this.senderId = new SimpleStringProperty(senderId);
         this.receiverId = new SimpleStringProperty(receiverId);
         this.message = new SimpleStringProperty(message);

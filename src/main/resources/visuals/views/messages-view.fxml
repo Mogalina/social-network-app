@@ -12,6 +12,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane
          styleClass="messages-container"
@@ -68,7 +69,7 @@
             <HBox styleClass="messager"
                   HBox.hgrow="ALWAYS"
                   VBox.vgrow="NEVER">
-                <Label fx:id="receiverEmail" />
+                <Text fx:id="receiverEmail" />
             </HBox>
             <ScrollPane styleClass="messages-container-scrollable"
                         fitToWidth="true"

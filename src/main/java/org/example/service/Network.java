@@ -234,13 +234,9 @@ public class Network implements Observable {
      * @throws EntityAlreadyExistsException if friend request is already sent or friend already exists
      */
     public void sendFriendRequest(String senderId, String receiverId) throws EntityAlreadyExistsException {
-        Optional<Friendship> friendshipRequest = findFriendship(senderId, receiverId);
-        if (friendshipRequest.isPresent()) {
-            if (friendshipRequest.get().isPending()) {
-                throw new EntityAlreadyExistsException("Request already sent");
-            } else {
-                throw new EntityAlreadyExistsException("You are already friends");
-            }
+        boolean alreadyExists = findFriendship(senderId, receiverId).isPresent();
+        if (alreadyExists) {
+            throw new EntityAlreadyExistsException("Request already sent");
         }
 
         StreamSupport.stream(friendshipService.findAll().spliterator(), false)
@@ -257,14 +253,18 @@ public class Network implements Observable {
                             Friendship request = new Friendship(senderId, receiverId);
                             friendshipService.save(request);
                             notifyObservers(request);
+
+                            Optional<User> sender = findUser(senderId);
+                            if (sender.isEmpty()) {
+                                throw new RuntimeException("Sender does not exist");
+                            }
+
+                            String notificationDescription = "Request from " + sender.get().getEmail();
+                            Notification notification = new Notification(notificationDescription, receiverId);
+                            notificationService.save(notification);
+                            notifyObservers(notification);
                         }
                 );
-
-        Optional<User> sender = findUser(senderId);
-        String notificationDescription = "Request from " + sender.get().getEmail();
-        Notification notification = new Notification(notificationDescription, receiverId);
-        notificationService.save(notification);
-        notifyObservers(notification);
     }
 
     /**
@@ -281,6 +281,17 @@ public class Network implements Observable {
                     friendshipService.deleteById(friendship.getId());
                     notifyObservers(friendship);
                 });
+
+        StreamSupport.stream(messageService.findAll().spliterator(), false)
+                .filter(message -> (Objects.equals(message.getSenderId(), senderId) && Objects.equals(message.getReceiverId(), receiverId)) ||
+                        (Objects.equals(message.getSenderId(), receiverId) && Objects.equals(message.getReceiverId(), senderId)))
+                .forEach(
+                        message -> {
+                            messageService.deleteById(message.getId());
+                            notifyObservers(message);
+                        }
+                );
+
     }
 
     /**
@@ -384,9 +395,13 @@ public class Network implements Observable {
      * @return an {@link Optional} containing the saved message
      */
     public Optional<Message> addMessage(Message message) {
-        Optional<User> receiver = findUser(message.getReceiverId());
-        String notificationDescription = "Message from " + receiver.get().getEmail();
-        Notification notification = new Notification(notificationDescription, receiver.get().getId());
+        Optional<User> senderUser = findUser(message.getSenderId());
+        if (senderUser.isEmpty()) {
+            throw new RuntimeException("Sender does not exist");
+        }
+
+        String notificationDescription = "Message from " + senderUser.get().getEmail();
+        Notification notification = new Notification(notificationDescription, message.getReceiverId());
         notificationService.save(notification);
         notifyObservers(notification);
 

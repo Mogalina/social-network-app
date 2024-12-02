@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.models.Message;
 import org.example.models.Observable;
@@ -55,7 +56,7 @@ public class MessagesViewController implements Observer {
     private VBox chatPannel;
 
     @FXML
-    private Label receiverEmail;
+    private Text receiverEmail;
 
     @FXML
     private TextField messageField;
@@ -104,7 +105,6 @@ public class MessagesViewController implements Observer {
         resultsListView.setOnMouseClicked(event -> {
             String selectedItem = resultsListView.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
-                // Update search field with selected user email
                 searchField.setText(selectedItem);
                 resultsListView.setVisible(false);
                 resultsListView.setManaged(false);
@@ -137,18 +137,14 @@ public class MessagesViewController implements Observer {
      * Fetches all the logged-in user's friends from the network and updates the search results.
      */
     private void fetchAllFriends() {
-        new Thread(() -> {
-            // Fetch friends of the logged-in user from the network
-            allUsers = network.getFriendsOfUser(UserController.getUser().getId());
+        // Fetch all friends of current logged-in user
+        allUsers = network.getFriendsOfUser(UserController.getUser().getId());
 
-            // Update the search results list in the JavaFX application thread
-            Platform.runLater(() -> {
-                List<String> userEmails = StreamSupport.stream(allUsers.spliterator(), false)
-                        .map(User::getEmail)
-                        .collect(Collectors.toList());
-                searchResults.setAll(userEmails);
-            });
-        }).start();
+        // Convert users to plain text emails and update search results
+        List<String> userEmails = StreamSupport.stream(allUsers.spliterator(), false)
+                .map(User::getEmail)
+                .collect(Collectors.toList());
+        searchResults.setAll(userEmails);
     }
 
     /**
@@ -191,11 +187,15 @@ public class MessagesViewController implements Observer {
      * Retrieves the receiver and sends the message through the network.
      */
     public void handleSendMessage() {
-        Stage stage = (Stage) chatPannel.getScene().getWindow();
+        Stage stage = (Stage) messageField.getScene().getWindow();
 
         try {
             // Retrieve the receiver user by email
             Optional<User> receiverUser = network.findUserByEmail(receiverEmail.getText());
+            if (receiverUser.isEmpty()) {
+                PopupNotification.showNotification(stage, "Please select a friend", 4000, "#ef5356");
+                return;
+            }
 
             // Create a new message object
             Message message = new Message(UserController.getUser().getId(),
