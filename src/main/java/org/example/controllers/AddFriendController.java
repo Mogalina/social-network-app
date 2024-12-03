@@ -105,13 +105,13 @@ public class AddFriendController implements Observer {
         });
 
         lastNameSearchField.textProperty().addListener(o -> {
-            filter.setFirstName(Optional.ofNullable(lastNameSearchField.getText()));
+            filter.setLastName(Optional.ofNullable(lastNameSearchField.getText()));
             currentPage = 0;
             fetchAllUsers();
         });
 
         emailSearchField.textProperty().addListener(o -> {
-            filter.setFirstName(Optional.ofNullable(emailSearchField.getText()));
+            filter.setEmail(Optional.ofNullable(emailSearchField.getText()));
             currentPage = 0;
             fetchAllUsers();
         });

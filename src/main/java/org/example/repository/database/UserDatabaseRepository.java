@@ -152,19 +152,19 @@ public class UserDatabaseRepository extends AbstractDatabaseRepository<String, U
         // Add conditions and parameters for filtering by first name
         filter.getFirstName().ifPresent(firstNameFilter -> {
             conditions.add("first_name LIKE ?");
-            params.add(firstNameFilter);
+            params.add("%" + firstNameFilter + "%");
         });
 
         // Add conditions and parameters for filtering by last name
         filter.getLastName().ifPresent(lastNameFilter -> {
             conditions.add("last_name LIKE ?");
-            params.add(lastNameFilter);
+            params.add("%" + lastNameFilter + "%");
         });
 
         // Add conditions and parameters for filtering by email
         filter.getEmail().ifPresent(emailFilter -> {
             conditions.add("email LIKE ?");
-            params.add(emailFilter);
+            params.add("%" + emailFilter + "%");
         });
 
         // Combine conditions into a single SQL WHERE clause
