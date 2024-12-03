@@ -1,22 +1,23 @@
 package org.example.controllers;
 
+import javafx.scene.control.*;
 import org.example.exceptions.EntityAlreadyExistsException;
 import org.example.models.Observable;
 import org.example.models.User;
+import org.example.models.dtos.UserFilterDTO;
 import org.example.service.Network;
+import org.example.utils.Paging.Page;
+import org.example.utils.Paging.Pageable;
 import org.example.utils.PopupNotification;
 import org.example.models.Observer;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.util.Optional;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 /**
@@ -28,16 +29,46 @@ public class AddFriendController implements Observer {
     private Network network;
 
     // Observable list to hold the search results (user emails)
-    private final ObservableList<String> searchResults = FXCollections.observableArrayList();
+    private final ObservableList<User> searchResults = FXCollections.observableArrayList();
 
-    // Collection of all users fetched from the network
-    private Iterable<User> allUsers = List.of();
+    // Strings to store the selected email in table
+    private String selectedEmail = null;
+
+    // Filter object for search criteria
+    private final UserFilterDTO filter = new UserFilterDTO();
+
+    // Tracks the current page of search results
+    private int currentPage = 0;
 
     @FXML
-    private TextField searchField;
+    private TextField firstNameSearchField;
 
     @FXML
-    private ListView<String> resultsListView;
+    private TextField lastNameSearchField;
+
+    @FXML
+    private TextField emailSearchField;
+
+    @FXML
+    private TableView<User> resultsTableView;
+
+    @FXML
+    private TableColumn<User, String> firstNameCol;
+
+    @FXML
+    private TableColumn<User, String> lastNameCol;
+
+    @FXML
+    private TableColumn<User, String> emailCol;
+
+    @FXML
+    private Label currentPageLabel;
+
+    @FXML
+    private Button btnPrevious;
+
+    @FXML
+    private Button btnNext;
 
     /**
      * Initializes the controller by setting up the network, fetching all users, and setting listeners for the search
@@ -49,30 +80,40 @@ public class AddFriendController implements Observer {
         network = GlobalNetwork.getNetwork();
         network.addObserver(this);
 
-        // Fetch all users from the network asynchronously
+        // Fetch all users from the network
         fetchAllUsers();
 
-        // Set the search results observable list to the ListView
-        resultsListView.setItems(searchResults);
+        // Set up the friends table
+        resultsTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        firstNameCol.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
+        lastNameCol.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+        emailCol.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
+        resultsTableView.setItems(searchResults);
 
-        // Add listener for the search field to filter users as the user types
-        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == null || newValue.trim().isEmpty()) {
-                // Clear search results if the input is empty
-                searchResults.clear();
-            } else {
-                // Filter the users based on the query text
-                filterUsers(newValue.trim());
+        // Set up listener for friend selection
+        resultsTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                selectedEmail = newValue.getEmail();
             }
         });
 
-        // Add mouse click listener to set the selected search result into the search field
-        resultsListView.setOnMouseClicked(event -> {
-            String selectedItem = resultsListView.getSelectionModel().getSelectedItem();
-            if (selectedItem != null) {
-                // Set the selected email from results into the search field
-                searchField.setText(selectedItem);
-            }
+        // Add listeners to the search fields for dynamic filtering
+        firstNameSearchField.textProperty().addListener(o -> {
+            filter.setFirstName(Optional.ofNullable(firstNameSearchField.getText()));
+            currentPage = 0;
+            fetchAllUsers();
+        });
+
+        lastNameSearchField.textProperty().addListener(o -> {
+            filter.setFirstName(Optional.ofNullable(lastNameSearchField.getText()));
+            currentPage = 0;
+            fetchAllUsers();
+        });
+
+        emailSearchField.textProperty().addListener(o -> {
+            filter.setFirstName(Optional.ofNullable(emailSearchField.getText()));
+            currentPage = 0;
+            fetchAllUsers();
         });
     }
 
@@ -91,51 +132,46 @@ public class AddFriendController implements Observer {
      * Fetches all users from the network in a separate thread to avoid blocking the UI.
      */
     private void fetchAllUsers() {
-        new Thread(() -> {
-            // Fetch all users from the network (blocking operation)
-            allUsers = network.getAllUsers();
+        // Number of users displayed per page
+        int pageSize = 5;
 
-            // Switch to the JavaFX Application thread to update the UI
-            javafx.application.Platform.runLater(() -> {
-                // Extract emails from the user objects and populate the searchResults list
-                List<String> userEmails = StreamSupport.stream(allUsers.spliterator(), false)
-                        .map(User::getEmail)
-                        .collect(Collectors.toList());
+        // Fetch paginated users from the network
+        Page<User> userPage = network.findAllUsersOnPage(new Pageable(currentPage, pageSize), filter);
 
-                // Update the search results
-                searchResults.setAll(userEmails);
-            });
-        }).start();
-    }
+        // Calculate total pages and adjust the current page if necessary
+        int totalNumberOfPages = (int) Math.ceil((double) userPage.getTotalNumberOfElements() / pageSize) - 1;
+        if (totalNumberOfPages <= -1) {
+            totalNumberOfPages = 1;
+        }
+        if (currentPage > totalNumberOfPages) {
+            currentPage = totalNumberOfPages;
+            userPage = network.findAllUsersOnPage(new Pageable(currentPage, pageSize), filter);
+        }
 
-    /**
-     * Filters the list of users based on the search query and updates the searchResults list.
-     *
-     * @param query the search query to filter users by email
-     */
-    private void filterUsers(String query) {
-        // Filter the list of all users based on the query (case-insensitive)
-        List<String> filteredUsers = StreamSupport.stream(allUsers.spliterator(), false)
-                .map(User::getEmail)
-                .filter(email -> email.toLowerCase().contains(query.toLowerCase()))
-                .collect(Collectors.toList());
+        // Enable/disable navigation buttons based on the current page
+        btnPrevious.setDisable(currentPage == 0);
+        btnNext.setDisable((currentPage + 1) * pageSize >= userPage.getTotalNumberOfElements());
 
-        // Update the search results list with the filtered emails
-        searchResults.setAll(filteredUsers);
+        // Update the search results and UI
+        List<User> users = StreamSupport.stream(userPage.getElementsOnPage().spliterator(), false).toList();
+        searchResults.setAll(users);
+        currentPageLabel.setText("Page " + (currentPage + 1) + " of " + (totalNumberOfPages + 1));
     }
 
     /**
      * Handles the action of sending a friend request to the user entered in the search field.
      */
-    public void handleAddFriend() throws EntityAlreadyExistsException {
+    public void handleAddFriend() {
         // Get the current window's stage
-        Stage stage = (Stage) searchField.getScene().getWindow();
-
-        // Get the email entered in the search field
-        String email = searchField.getText();
+        Stage stage = (Stage) resultsTableView.getScene().getWindow();
 
         // Check if a user with the entered email exists in the network
-        Optional<User> receiver = network.findUserByEmail(email);
+        Optional<User> receiver = network.findUserByEmail(selectedEmail);
+
+        // Check if receiver user is same as sender user
+        if (receiver.isPresent() && UserController.getUser().getEmail().equals(selectedEmail)) {
+            PopupNotification.showNotification(stage, "You cannot be friend with yourself", 4000, "#ef5356");
+        }
 
         if (receiver.isPresent()) {
             // Send a friend request to the selected user
@@ -147,7 +183,25 @@ public class AddFriendController implements Observer {
             }
 
         } else {
-            PopupNotification.showNotification(stage, "Invalid email address", 4000, "#ef5356");
+            PopupNotification.showNotification(stage, "Please select a user", 4000, "#ef5356");
         }
+    }
+
+    /**
+     * Handles the "Previous Page" button click event.
+     * Fetches the previous page of users.
+     */
+    public void handlePreviousPage() {
+        currentPage--;
+        fetchAllUsers();
+    }
+
+    /**
+     * Handles the "Next Page" button click event.
+     * Fetches the next page of users.
+     */
+    public void handleNextPage() {
+        currentPage++;
+        fetchAllUsers();
     }
 }

@@ -6,7 +6,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.Label?>
 
 <?import java.net.URL?>
 
@@ -25,16 +27,59 @@
 
     <VBox styleClass="add-friend-container">
         <Text text="Add Friend" styleClass="title-field" />
-        <StackPane styleClass="search-bar">
-            <TextField fx:id="searchField" styleClass="search-bar-input" promptText="Search a friend" />
-            <ImageView fitWidth="25.0" fitHeight="25.0"
-                       preserveRatio="true"
-                       styleClass="search-bar-icon"
-                       StackPane.alignment="CENTER_RIGHT">
-                <Image url="@../../assets/images/pngs/search-icon.png" />
-            </ImageView>
-        </StackPane>
-        <ListView fx:id="resultsListView" styleClass="results-list" />
-        <Button styleClass="confirm-btn" text="Send" onAction="#handleAddFriend" />
+        <HBox styleClass="search-bars">
+            <StackPane styleClass="search-bar">
+                <TextField fx:id="firstNameSearchField" styleClass="search-bar-input" promptText="Search first name" />
+                <ImageView fitWidth="25.0" fitHeight="25.0"
+                           preserveRatio="true"
+                           styleClass="search-bar-icon"
+                           StackPane.alignment="CENTER_RIGHT">
+                    <Image url="@../../assets/images/pngs/search-icon.png" />
+                </ImageView>
+            </StackPane>
+            <StackPane styleClass="search-bar">
+                <TextField fx:id="lastNameSearchField" styleClass="search-bar-input" promptText="Search last name" />
+                <ImageView fitWidth="25.0" fitHeight="25.0"
+                           preserveRatio="true"
+                           styleClass="search-bar-icon"
+                           StackPane.alignment="CENTER_RIGHT">
+                    <Image url="@../../assets/images/pngs/search-icon.png" />
+                </ImageView>
+            </StackPane>
+            <StackPane styleClass="search-bar">
+                <TextField fx:id="emailSearchField" styleClass="search-bar-input" promptText="Search email" />
+                <ImageView fitWidth="25.0" fitHeight="25.0"
+                           preserveRatio="true"
+                           styleClass="search-bar-icon"
+                           StackPane.alignment="CENTER_RIGHT">
+                    <Image url="@../../assets/images/pngs/search-icon.png" />
+                </ImageView>
+            </StackPane>
+        </HBox>
+        <TableView fx:id="resultsTableView" styleClass="user-table-add">
+            <columns>
+                <TableColumn text="First Name"
+                             fx:id="firstNameCol"
+                             styleClass="table-column" />
+                <TableColumn text="Last Name"
+                             fx:id="lastNameCol"
+                             styleClass="table-column"/>
+                <TableColumn text="Email"
+                             fx:id="emailCol"
+                             styleClass="table-column"/>
+            </columns>
+        </TableView>
+        <HBox styleClass="table-options-container">
+            <Button styleClass="confirm-btn"
+                    fx:id="btnPrevious"
+                    text="Previous"
+                    onAction="#handlePreviousPage" />
+            <Label fx:id="currentPageLabel" />
+            <Button styleClass="confirm-btn"
+                    fx:id="btnNext"
+                    text="Next"
+                    onAction="#handleNextPage" />
+        </HBox>
+        <Button styleClass="confirm-btn, add-friend-btn" text="Send" onAction="#handleAddFriend" />
     </VBox>
 </StackPane>

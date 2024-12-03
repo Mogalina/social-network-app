@@ -4,6 +4,10 @@ import org.example.exceptions.EntityAlreadyExistsException;
 import org.example.models.*;
 import org.example.models.Observable;
 import org.example.models.Observer;
+import org.example.models.dtos.UserFilterDTO;
+import org.example.repository.database.UserDatabaseRepository;
+import org.example.utils.Paging.Page;
+import org.example.utils.Paging.Pageable;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -499,5 +503,26 @@ public class Network implements Observable {
         return StreamSupport.stream(getAllNotifications().spliterator(), false)
                 .filter(notification -> Objects.equals(notification.getUserId(), uid))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Retrieves a paginated list of all users without applying any filter criteria.
+     *
+     * @param pageable the pagination details
+     * @return a page containing all users for the specified pagination
+     */
+    public Page<User> findAllUsersOnPage(Pageable pageable) {
+        return ((UserService) userService).findAllOnPage(pageable);
+    }
+
+    /**
+     * Retrieves a paginated list of users along with the total number of matching users.
+     *
+     * @param pageable the pagination details
+     * @param filter the filter criteria for querying users
+     * @return a page containing the list of users and the total count of matching users
+     */
+    public Page<User> findAllUsersOnPage(Pageable pageable, UserFilterDTO filter) {
+        return ((UserService) userService).findAllOnPage(pageable, filter);
     }
 }

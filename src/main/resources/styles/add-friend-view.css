@@ -9,12 +9,12 @@
     -fx-background-color: #f0f0f0;
     -fx-background-radius: 20px;
     -fx-padding: 20px 10px 20px 10px;
-    -fx-max-width: 350px;
-    -fx-pref-width: 350px;
-    -fx-min-width: 350px;
-    -fx-min-height: 450px;
-    -fx-pref-height: 450px;
-    -fx-max-height: 450px;
+    -fx-max-width: 750px;
+    -fx-pref-width: 750px;
+    -fx-min-width: 750px;
+    -fx-min-height: 600px;
+    -fx-pref-height: 600px;
+    -fx-max-height: 600px;
     -fx-border-radius: 20px;
     -fx-border-color: lightgray;
     -fx-border-width: 3px;
@@ -47,9 +47,9 @@
 
 .search-bar {
     -fx-alignment: center;
-    -fx-min-width: 290px;
-    -fx-pref-width: 290px;
-    -fx-max-width: 290px;
+    -fx-min-width: 200px;
+    -fx-pref-width: 200px;
+    -fx-max-width: 200px;
     -fx-translate-y: -20px;
 }
 
@@ -58,9 +58,9 @@
     -fx-border-color: lightgray;
     -fx-border-style: solid;
     -fx-background-color: transparent;
-    -fx-min-width: 270px;
-    -fx-pref-width: 270px;
-    -fx-max-width: 270px;
+    -fx-min-width: 180px;
+    -fx-pref-width: 180px;
+    -fx-max-width: 180px;
     -fx-padding: 0px 33px 10px 0px;
     -fx-fill: #403e3a;
     -fx-translate-y: 25px;
@@ -76,13 +76,44 @@
     -fx-cursor: hand;
 }
 
-.results-list {
-    -fx-max-width: 282px;
-    -fx-pref-width: 282px;
-    -fx-min-width: 282px;
+.user-table-add {
     -fx-background-color: transparent;
+    -fx-min-height: 200px;
+    -fx-pref-height: 200px;
+    -fx-max-height: 200px;
+    -fx-min-width: 690px;
+    -fx-pref-width: 690px;
+    -fx-max-width: 690px;
+    -fx-translate-y: 50px;
 }
 
-.list-cell {
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {
+    -fx-font-weight: normal !important;
+}
+
+.column-header {
+    -fx-padding: 0 10 0 10;
+}
+
+.table-column {
     -fx-background-color: #f0f0f0;
+    -fx-padding: 0 10 0 10;
+}
+
+.search-bars {
+    -fx-alignment: center;
+    -fx-spacing: 30px;
+    -fx-translate-y: 20px;
+}
+
+.table-options-container {
+    -fx-alignment: center;
+    -fx-spacing: 170px;
+    -fx-translate-y: 60px;
+}
+
+.add-friend-btn {
+    -fx-translate-y: 80px;
 }

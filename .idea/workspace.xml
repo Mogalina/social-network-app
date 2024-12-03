@@ -6,10 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="b50978c8-a92d-4807-aaaa-526228acbbf3" name="Changes" comment="Configure project.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controllers/MessagesViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controllers/MessagesViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/models/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controllers/AddFriendController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controllers/AddFriendController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/database/UserDatabaseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/database/UserDatabaseRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/Network.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/Network.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/visuals/views/messages-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/visuals/views/messages-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/add-friend-view.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/add-friend-view.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/visuals/views/add-friend-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/visuals/views/add-friend-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +26,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="FxmlFile" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -200,7 +202,7 @@
       <workItem from="1732806763075" duration="32565000" />
       <workItem from="1732875217853" duration="2894000" />
       <workItem from="1732890334699" duration="4111000" />
-      <workItem from="1733168912343" duration="1959000" />
+      <workItem from="1733168912343" duration="14896000" />
     </task>
     <task id="LOCAL-00001" summary="Configure project.">
       <option name="closed" value="true" />
